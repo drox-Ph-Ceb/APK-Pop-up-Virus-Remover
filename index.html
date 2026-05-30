@@ -20,6 +20,7 @@
             --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--font-main);
             background-color: var(--bg-primary);
@@ -36,7 +37,7 @@
         nav a { color: var(--accent); text-decoration: none; font-weight: 500; transition: 0.2s; }
         nav a:hover { color: #fff; text-decoration: underline; }
         main { padding: 30px 40px; }
-        section { margin-bottom: 40px; }
+        section { margin-bottom: 40px; scroll-margin-top: 80px; }
         h2 { color: #fff; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.5rem; }
         h3 { color: var(--accent); margin: 20px 0 10px; font-size: 1.2rem; }
         p { margin-bottom: 12px; color: var(--text-secondary); }
@@ -55,7 +56,8 @@
         table { width: 100%; border-collapse: collapse; margin: 15px 0; }
         th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
         th { background: var(--bg-card); color: #fff; }
-        .video-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 12px 0; display: flex; align-items: center; gap: 12px; }
+        .video-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 12px 0; display: flex; align-items: center; gap: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+        .video-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
         .video-card img { width: 120px; height: 68px; border-radius: 4px; object-fit: cover; background: #000; }
         .video-card .info { flex: 1; }
         .video-card a { color: var(--accent); font-weight: 600; text-decoration: none; display: block; margin-bottom: 4px; }
@@ -66,12 +68,96 @@
         .activation-box a { display: inline-block; background: #fff; color: #1e3a8a; padding: 10px 24px; border-radius: 6px; font-weight: bold; text-decoration: none; margin-top: 10px; transition: 0.2s; }
         .activation-box a:hover { background: #f0f9ff; transform: translateY(-2px); }
         footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--bg-card); }
+        section:target { animation: highlight-section 1.5s ease; }
+        @keyframes highlight-section {
+            0% { box-shadow: 0 0 0 3px var(--accent); border-radius: 12px; }
+            100% { box-shadow: none; }
+        }
+        .scroll-down-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--accent); padding: 6px 14px; border-radius: 20px;
+            font-size: 0.85rem; text-decoration: none; margin: 10px 0;
+            transition: all 0.2s; cursor: pointer;
+        }
+        .scroll-down-btn:hover { background: var(--accent); color: #fff; transform: translateY(2px); }
+        .scroll-down-btn svg { width: 16px; height: 16px; animation: bounce 1.5s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+        .back-to-top {
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--accent); color: #fff;
+            width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s, opacity 0.2s;
+            opacity: 0; pointer-events: none; z-index: 100;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top:hover { transform: translateY(-3px); background: #79b8ff; }
+        
+        /* ✨ NEW: Scrollable video container */
+        .video-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin: 15px 0;
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+        }
+        .video-container::-webkit-scrollbar { width: 8px; }
+        .video-container::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+        .video-container::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        .video-container::-webkit-scrollbar-thumb:hover {
+            background: #79b8ff;
+        }
+        .video-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--bg-secondary));
+            pointer-events: none;
+            opacity: 0.6;
+            border-radius: 0 0 8px 8px;
+        }
+        .video-scroll-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .video-scroll-hint svg {
+            width: 14px;
+            height: 14px;
+            animation: bounce 2s infinite;
+        }
+        
         @media (max-width: 768px) {
             .container { border-radius: 0; }
             nav ul { flex-direction: column; gap: 8px; }
             main { padding: 20px; }
             header h1 { font-size: 1.8rem; }
             .video-card { flex-direction: column; text-align: center; }
+            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; }
+            .video-container { max-height: 300px; }
         }
     </style>
 </head>
@@ -206,21 +292,51 @@
 
             <section id="videos">
                 <h2>📺 Video Tutorials</h2>
+                
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <a href="#videos" class="scroll-down-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                        Jump to Videos
+                    </a>
+                </div>
+                
                 <p>Watch step-by-step guides to master APK Cleaner & Uninstaller Pro:</p>
                 
-                <div class="video-card">
-                    <img src="https://img.youtube.com/vi/YfWYg6iBq5k/mqdefault.jpg" alt="Tutorial Thumbnail">
-                    <div class="info">
-                        <a href="https://www.youtube.com/watch?v=YfWYg6iBq5k&list=PLq05kYUDiF4S1-MP8G_S847LKlMbtE90O&index=2" target="_blank">▶️ Full Tutorial Playlist</a>
-                        <span class="desc">Complete walkthrough: Setup, App Management, Debloating, Backup & Advanced Tools</span>
+                <!-- ✨ Scrollable video container -->
+                <div class="video-container" id="videoScrollContainer">
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/YfWYg6iBq5k/mqdefault.jpg" alt="Tutorial Thumbnail">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=YfWYg6iBq5k&list=PLq05kYUDiF4S1-MP8G_S847LKlMbtE90O&index=2" target="_blank">▶️ Full Tutorial Playlist</a>
+                            <span class="desc">Complete walkthrough: Setup, App Management, Debloating, Backup & Advanced Tools</span>
+                        </div>
                     </div>
-                </div>
-				                <div class="video-card">
-                    <img src="https://img.youtube.com/vi/oMEB2qmCj9k/mqdefault.jpg" alt="Tutorial Thumbnail">
-                    <div class="info">
-                        <a href="https://www.youtube.com/watch?v=oMEB2qmCj9k" target="_blank">▶️ Full Tutorial Playlist</a>
-                        <span class="desc">Complete walkthrough: Setup, App Management, Debloating, Backup & Advanced Tools</span>
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/oMEB2qmCj9k/mqdefault.jpg" alt="Tutorial Thumbnail">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=oMEB2qmCj9k" target="_blank">▶️ Pop-up Virus Remover with icons</a>
+                            <span class="desc">Learn how to remove annoying pop-up ads and viruses using the cleaner</span>
+                        </div>
                     </div>
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/sr-3w7OoNgs/mqdefault.jpg" alt="Tutorial Thumbnail">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=sr-3w7OoNgs" target="_blank">▶️ Samsung ADB Enabler and FRP Bypass</a>
+                            <span class="desc">Step-by-step guide for Samsung devices: enabling ADB and bypassing FRP lock</span>
+                        </div>
+                    </div>
+                
+                <!-- ✨ Scroll hint -->
+                <div class="video-scroll-hint">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
+                    <span>Scroll down to see more videos</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
                 </div>
                 
                 <div class="tip-box">
@@ -265,10 +381,27 @@
         <footer>
             <p>APK Cleaner & Uninstaller Pro &copy; by drox-Ph-Ceb<br>
             Use system tools responsibly.<br>
-			<a href="https://www.mediafire.com/file/ukywb96bwp00wd5/APK_Cleaner_and_Uninstaller_Setup_Installer_v4.rar/file" target="_blank" style="color: var(--accent);">Latest Update</a>
+            <a href="https://www.mediafire.com/file/ukywb96bwp00wd5/APK_Cleaner_and_Uninstaller_Setup_Installer_v4.rar/file" target="_blank" style="color: var(--accent);">Latest Update</a>
             <a href="https://www.facebook.com/jairah.mazo.5/" target="_blank" style="color: var(--accent);">Contact Developer</a> | 
             <a href="https://www.youtube.com/watch?v=YfWYg6iBq5k&list=PLq05kYUDiF4S1-MP8G_S847LKlMbtE90O&index=2" target="_blank" style="color: var(--accent);">Watch Tutorials</a></p>
         </footer>
     </div>
+    
+    <a href="#" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
