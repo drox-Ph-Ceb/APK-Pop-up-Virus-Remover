@@ -1,25 +1,421 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Protected Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APK Cleaner & Uninstaller Pro - User Manual</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #1c2128;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent: #58a6ff;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --purple: #6A5ACD;
+            --border: #30363d;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        header { background: linear-gradient(135deg, #1f6feb 0%, #58a6ff 100%); color: #fff; padding: 30px 40px; text-align: center; }
+        header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+        header p { opacity: 0.9; font-size: 1.1rem; }
+        nav { background: var(--bg-card); padding: 15px 40px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+        nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 15px; }
+        nav a { color: var(--accent); text-decoration: none; font-weight: 500; transition: 0.2s; }
+        nav a:hover { color: #fff; text-decoration: underline; }
+        main { padding: 30px 40px; }
+        section { margin-bottom: 40px; scroll-margin-top: 80px; }
+        h2 { color: #fff; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 16px; font-size: 1.5rem; }
+        h3 { color: var(--accent); margin: 20px 0 10px; font-size: 1.2rem; }
+        p { margin-bottom: 12px; color: var(--text-secondary); }
+        ul, ol { margin-left: 20px; margin-bottom: 15px; color: var(--text-secondary); }
+        li { margin-bottom: 6px; }
+        .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .legend-item { display: flex; align-items: center; gap: 8px; background: var(--bg-card); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); }
+        .dot { width: 12px; height: 12px; border-radius: 3px; }
+        .dot.green { background: #90ee90; }
+        .dot.orange { background: #ffa500; }
+        .dot.red { background: #ff4d4d; }
+        .dot.purple { background: var(--purple); }
+        .tip-box { background: rgba(88, 166, 255, 0.1); border-left: 4px solid var(--accent); padding: 12px 16px; border-radius: 4px; margin: 15px 0; }
+        .warning-box { background: rgba(231, 76, 60, 0.1); border-left: 4px solid var(--danger); padding: 12px 16px; border-radius: 4px; margin: 15px 0; }
+        .btn-demo { display: inline-block; background: var(--bg-card); border: 1px solid var(--border); color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 0.9rem; margin: 2px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { padding: 10px 14px; border: 1px solid var(--border); text-align: left; }
+        th { background: var(--bg-card); color: #fff; }
+        .video-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 12px 0; display: flex; align-items: center; gap: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+        .video-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .video-card img { width: 120px; height: 68px; border-radius: 4px; object-fit: cover; background: #000; }
+        .video-card .info { flex: 1; }
+        .video-card a { color: var(--accent); font-weight: 600; text-decoration: none; display: block; margin-bottom: 4px; }
+        .video-card a:hover { text-decoration: underline; }
+        .video-card .desc { font-size: 0.9rem; color: var(--text-secondary); }
+        .activation-box { background: linear-gradient(135deg, #1e3a8a, #3b82f6); border-radius: 8px; padding: 20px; text-align: center; margin: 20px 0; }
+        .activation-box h3 { color: #fff; margin-bottom: 10px; }
+        .activation-box a { display: inline-block; background: #fff; color: #1e3a8a; padding: 10px 24px; border-radius: 6px; font-weight: bold; text-decoration: none; margin-top: 10px; transition: 0.2s; }
+        .activation-box a:hover { background: #f0f9ff; transform: translateY(-2px); }
+        footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.85rem; border-top: 1px solid var(--border); background: var(--bg-card); }
+        section:target { animation: highlight-section 1.5s ease; }
+        @keyframes highlight-section {
+            0% { box-shadow: 0 0 0 3px var(--accent); border-radius: 12px; }
+            100% { box-shadow: none; }
+        }
+        .scroll-down-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--accent); padding: 6px 14px; border-radius: 20px;
+            font-size: 0.85rem; text-decoration: none; margin: 10px 0;
+            transition: all 0.2s; cursor: pointer;
+        }
+        .scroll-down-btn:hover { background: var(--accent); color: #fff; transform: translateY(2px); }
+        .scroll-down-btn svg { width: 16px; height: 16px; animation: bounce 1.5s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+        .back-to-top {
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--accent); color: #fff;
+            width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s, opacity 0.2s;
+            opacity: 0; pointer-events: none; z-index: 100;
+        }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top:hover { transform: translateY(-3px); background: #79b8ff; }
+        
+        /* ✨ NEW: Scrollable video container */
+        .video-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 8px;
+            margin: 15px 0;
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-secondary);
+        }
+        .video-container::-webkit-scrollbar { width: 8px; }
+        .video-container::-webkit-scrollbar-track {
+            background: var(--bg-card);
+            border-radius: 4px;
+        }
+        .video-container::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+        .video-container::-webkit-scrollbar-thumb:hover {
+            background: #79b8ff;
+        }
+        .video-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--bg-secondary));
+            pointer-events: none;
+            opacity: 0.6;
+            border-radius: 0 0 8px 8px;
+        }
+        .video-scroll-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .video-scroll-hint svg {
+            width: 14px;
+            height: 14px;
+            animation: bounce 2s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .container { border-radius: 0; }
+            nav ul { flex-direction: column; gap: 8px; }
+            main { padding: 20px; }
+            header h1 { font-size: 1.8rem; }
+            .video-card { flex-direction: column; text-align: center; }
+            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; }
+            .video-container { max-height: 300px; }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>APK Cleaner & Uninstaller Pro</h1>
+            <strong>Official User Manual & Quick Reference Guide</strong>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#setup">Getting Started</a></li>
+                <li><a href="#interface">Interface Overview</a></li>
+                <li><a href="#apps">Managing Apps</a></li>
+                <li><a href="#debloat">System Disabler</a></li>
+                <li><a href="#install">APK Installation</a></li>
+                <li><a href="#utilities">Utilities & Tools</a></li>
+                <li><a href="#videos">📺 Video Tutorials</a></li>
+                <li><a href="#activation">🔑 Activation</a></li>
+                <li><a href="#faq">Troubleshooting</a></li>
+            </ul>
+        </nav>
+        <main>
+            <section id="setup">
+                <h2>📱 Getting Started</h2>
+                <p>Before using the application, ensure your Android device is properly prepared:</p>
+                <ol>
+                    <li>Enable <strong>Developer Options</strong> by tapping <em>Build Number</em> 7 times in Settings.</li>
+                    <li>Navigate to <strong>Developer Options</strong> and toggle it <strong>ON</strong>.</li>
+                    <li>Enable <strong>USB Debugging</strong>.</li>
+                    <li>Connect your phone to the PC via USB cable.</li>
+                    <li>When prompted on your phone, tap <strong>Allow USB Debugging</strong> (check "Always allow" for future sessions).</li>
+                </ol>
+                <div class="tip-box">💡 <strong>Pro Tip:</strong> If connection fails, try disabling <em>USB Debugging Security</em> or enabling <em>Disable Permission Monitoring</em> in Developer Options.</div>
+            </section>
 
-<script>
-const data = "PCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQo8aGVhZD4NCiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+DQogICAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPg0KICAgIDx0aXRsZT5BUEsgQ2xlYW5lciAmIFVuaW5zdGFsbGVyIFBybyAtIFVzZXIgTWFudWFsPC90aXRsZT4NCiAgICA8c3R5bGU+DQogICAgICAgIDpyb290IHsNCiAgICAgICAgICAgIC0tYmctcHJpbWFyeTogIzBkMTExNzsNCiAgICAgICAgICAgIC0tYmctc2Vjb25kYXJ5OiAjMTYxYjIyOw0KICAgICAgICAgICAgLS1iZy1jYXJkOiAjMWMyMTI4Ow0KICAgICAgICAgICAgLS10ZXh0LXByaW1hcnk6ICNjOWQxZDk7DQogICAgICAgICAgICAtLXRleHQtc2Vjb25kYXJ5OiAjOGI5NDllOw0KICAgICAgICAgICAgLS1hY2NlbnQ6ICM1OGE2ZmY7DQogICAgICAgICAgICAtLXN1Y2Nlc3M6ICMyZWNjNzE7DQogICAgICAgICAgICAtLXdhcm5pbmc6ICNmMzljMTI7DQogICAgICAgICAgICAtLWRhbmdlcjogI2U3NGMzYzsNCiAgICAgICAgICAgIC0tcHVycGxlOiAjNkE1QUNEOw0KICAgICAgICAgICAgLS1ib3JkZXI6ICMzMDM2M2Q7DQogICAgICAgICAgICAtLWZvbnQtbWFpbjogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCAiU2Vnb2UgVUkiLCBSb2JvdG8sIEhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWY7DQogICAgICAgIH0NCiAgICAgICAgKiB7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IG1hcmdpbjogMDsgcGFkZGluZzogMDsgfQ0KICAgICAgICBodG1sIHsgc2Nyb2xsLWJlaGF2aW9yOiBzbW9vdGg7IH0NCiAgICAgICAgYm9keSB7DQogICAgICAgICAgICBmb250LWZhbWlseTogdmFyKC0tZm9udC1tYWluKTsNCiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLXByaW1hcnkpOw0KICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtcHJpbWFyeSk7DQogICAgICAgICAgICBsaW5lLWhlaWdodDogMS42Ow0KICAgICAgICAgICAgcGFkZGluZzogMjBweDsNCiAgICAgICAgfQ0KICAgICAgICAuY29udGFpbmVyIHsgbWF4LXdpZHRoOiA5MDBweDsgbWFyZ2luOiAwIGF1dG87IGJhY2tncm91bmQ6IHZhcigtLWJnLXNlY29uZGFyeSk7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWJvcmRlcik7IGJvcmRlci1yYWRpdXM6IDEycHg7IG92ZXJmbG93OiBoaWRkZW47IH0NCiAgICAgICAgaGVhZGVyIHsgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KDEzNWRlZywgIzFmNmZlYiAwJSwgIzU4YTZmZiAxMDAlKTsgY29sb3I6ICNmZmY7IHBhZGRpbmc6IDMwcHggNDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyB9DQogICAgICAgIGhlYWRlciBoMSB7IGZvbnQtc2l6ZTogMi4ycmVtOyBtYXJnaW4tYm90dG9tOiA4cHg7IH0NCiAgICAgICAgaGVhZGVyIHAgeyBvcGFjaXR5OiAwLjk7IGZvbnQtc2l6ZTogMS4xcmVtOyB9DQogICAgICAgIG5hdiB7IGJhY2tncm91bmQ6IHZhcigtLWJnLWNhcmQpOyBwYWRkaW5nOiAxNXB4IDQwcHg7IGJvcmRlci1ib3R0b206IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBwb3NpdGlvbjogc3RpY2t5OyB0b3A6IDA7IHotaW5kZXg6IDEwOyB9DQogICAgICAgIG5hdiB1bCB7IGxpc3Qtc3R5bGU6IG5vbmU7IGRpc3BsYXk6IGZsZXg7IGZsZXgtd3JhcDogd3JhcDsgZ2FwOiAxNXB4OyB9DQogICAgICAgIG5hdiBhIHsgY29sb3I6IHZhcigtLWFjY2VudCk7IHRleHQtZGVjb3JhdGlvbjogbm9uZTsgZm9udC13ZWlnaHQ6IDUwMDsgdHJhbnNpdGlvbjogMC4yczsgfQ0KICAgICAgICBuYXYgYTpob3ZlciB7IGNvbG9yOiAjZmZmOyB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTsgfQ0KICAgICAgICBtYWluIHsgcGFkZGluZzogMzBweCA0MHB4OyB9DQogICAgICAgIHNlY3Rpb24geyBtYXJnaW4tYm90dG9tOiA0MHB4OyBzY3JvbGwtbWFyZ2luLXRvcDogODBweDsgfQ0KICAgICAgICBoMiB7IGNvbG9yOiAjZmZmOyBib3JkZXItYm90dG9tOiAycHggc29saWQgdmFyKC0tYm9yZGVyKTsgcGFkZGluZy1ib3R0b206IDhweDsgbWFyZ2luLWJvdHRvbTogMTZweDsgZm9udC1zaXplOiAxLjVyZW07IH0NCiAgICAgICAgaDMgeyBjb2xvcjogdmFyKC0tYWNjZW50KTsgbWFyZ2luOiAyMHB4IDAgMTBweDsgZm9udC1zaXplOiAxLjJyZW07IH0NCiAgICAgICAgcCB7IG1hcmdpbi1ib3R0b206IDEycHg7IGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7IH0NCiAgICAgICAgdWwsIG9sIHsgbWFyZ2luLWxlZnQ6IDIwcHg7IG1hcmdpbi1ib3R0b206IDE1cHg7IGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7IH0NCiAgICAgICAgbGkgeyBtYXJnaW4tYm90dG9tOiA2cHg7IH0NCiAgICAgICAgLmxlZ2VuZCB7IGRpc3BsYXk6IGZsZXg7IGZsZXgtd3JhcDogd3JhcDsgZ2FwOiAxMHB4OyBtYXJnaW46IDE1cHggMDsgfQ0KICAgICAgICAubGVnZW5kLWl0ZW0geyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDhweDsgYmFja2dyb3VuZDogdmFyKC0tYmctY2FyZCk7IHBhZGRpbmc6IDhweCAxMnB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWJvcmRlcik7IH0NCiAgICAgICAgLmRvdCB7IHdpZHRoOiAxMnB4OyBoZWlnaHQ6IDEycHg7IGJvcmRlci1yYWRpdXM6IDNweDsgfQ0KICAgICAgICAuZG90LmdyZWVuIHsgYmFja2dyb3VuZDogIzkwZWU5MDsgfQ0KICAgICAgICAuZG90Lm9yYW5nZSB7IGJhY2tncm91bmQ6ICNmZmE1MDA7IH0NCiAgICAgICAgLmRvdC5yZWQgeyBiYWNrZ3JvdW5kOiAjZmY0ZDRkOyB9DQogICAgICAgIC5kb3QucHVycGxlIHsgYmFja2dyb3VuZDogdmFyKC0tcHVycGxlKTsgfQ0KICAgICAgICAudGlwLWJveCB7IGJhY2tncm91bmQ6IHJnYmEoODgsIDE2NiwgMjU1LCAwLjEpOyBib3JkZXItbGVmdDogNHB4IHNvbGlkIHZhcigtLWFjY2VudCk7IHBhZGRpbmc6IDEycHggMTZweDsgYm9yZGVyLXJhZGl1czogNHB4OyBtYXJnaW46IDE1cHggMDsgfQ0KICAgICAgICAud2FybmluZy1ib3ggeyBiYWNrZ3JvdW5kOiByZ2JhKDIzMSwgNzYsIDYwLCAwLjEpOyBib3JkZXItbGVmdDogNHB4IHNvbGlkIHZhcigtLWRhbmdlcik7IHBhZGRpbmc6IDEycHggMTZweDsgYm9yZGVyLXJhZGl1czogNHB4OyBtYXJnaW46IDE1cHggMDsgfQ0KICAgICAgICAuYnRuLWRlbW8geyBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IGJhY2tncm91bmQ6IHZhcigtLWJnLWNhcmQpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBjb2xvcjogI2ZmZjsgcGFkZGluZzogNHB4IDEwcHg7IGJvcmRlci1yYWRpdXM6IDRweDsgZm9udC1zaXplOiAwLjlyZW07IG1hcmdpbjogMnB4OyB9DQogICAgICAgIHRhYmxlIHsgd2lkdGg6IDEwMCU7IGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7IG1hcmdpbjogMTVweCAwOyB9DQogICAgICAgIHRoLCB0ZCB7IHBhZGRpbmc6IDEwcHggMTRweDsgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tYm9yZGVyKTsgdGV4dC1hbGlnbjogbGVmdDsgfQ0KICAgICAgICB0aCB7IGJhY2tncm91bmQ6IHZhcigtLWJnLWNhcmQpOyBjb2xvcjogI2ZmZjsgfQ0KICAgICAgICAudmlkZW8tY2FyZCB7IGJhY2tncm91bmQ6IHZhcigtLWJnLWNhcmQpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBib3JkZXItcmFkaXVzOiA4cHg7IHBhZGRpbmc6IDE2cHg7IG1hcmdpbjogMTJweCAwOyBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDEycHg7IHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjJzLCBib3gtc2hhZG93IDAuMnM7IH0NCiAgICAgICAgLnZpZGVvLWNhcmQ6aG92ZXIgeyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTJweCk7IGJveC1zaGFkb3c6IDAgNHB4IDEycHggcmdiYSgwLDAsMCwwLjMpOyB9DQogICAgICAgIC52aWRlby1jYXJkIGltZyB7IHdpZHRoOiAxMjBweDsgaGVpZ2h0OiA2OHB4OyBib3JkZXItcmFkaXVzOiA0cHg7IG9iamVjdC1maXQ6IGNvdmVyOyBiYWNrZ3JvdW5kOiAjMDAwOyB9DQogICAgICAgIC52aWRlby1jYXJkIC5pbmZvIHsgZmxleDogMTsgfQ0KICAgICAgICAudmlkZW8tY2FyZCBhIHsgY29sb3I6IHZhcigtLWFjY2VudCk7IGZvbnQtd2VpZ2h0OiA2MDA7IHRleHQtZGVjb3JhdGlvbjogbm9uZTsgZGlzcGxheTogYmxvY2s7IG1hcmdpbi1ib3R0b206IDRweDsgfQ0KICAgICAgICAudmlkZW8tY2FyZCBhOmhvdmVyIHsgdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7IH0NCiAgICAgICAgLnZpZGVvLWNhcmQgLmRlc2MgeyBmb250LXNpemU6IDAuOXJlbTsgY29sb3I6IHZhcigtLXRleHQtc2Vjb25kYXJ5KTsgfQ0KICAgICAgICAuYWN0aXZhdGlvbi1ib3ggeyBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjMWUzYThhLCAjM2I4MmY2KTsgYm9yZGVyLXJhZGl1czogOHB4OyBwYWRkaW5nOiAyMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IG1hcmdpbjogMjBweCAwOyB9DQogICAgICAgIC5hY3RpdmF0aW9uLWJveCBoMyB7IGNvbG9yOiAjZmZmOyBtYXJnaW4tYm90dG9tOiAxMHB4OyB9DQogICAgICAgIC5hY3RpdmF0aW9uLWJveCBhIHsgZGlzcGxheTogaW5saW5lLWJsb2NrOyBiYWNrZ3JvdW5kOiAjZmZmOyBjb2xvcjogIzFlM2E4YTsgcGFkZGluZzogMTBweCAyNHB4OyBib3JkZXItcmFkaXVzOiA2cHg7IGZvbnQtd2VpZ2h0OiBib2xkOyB0ZXh0LWRlY29yYXRpb246IG5vbmU7IG1hcmdpbi10b3A6IDEwcHg7IHRyYW5zaXRpb246IDAuMnM7IH0NCiAgICAgICAgLmFjdGl2YXRpb24tYm94IGE6aG92ZXIgeyBiYWNrZ3JvdW5kOiAjZjBmOWZmOyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTJweCk7IH0NCiAgICAgICAgZm9vdGVyIHsgdGV4dC1hbGlnbjogY2VudGVyOyBwYWRkaW5nOiAyMHB4OyBjb2xvcjogdmFyKC0tdGV4dC1zZWNvbmRhcnkpOyBmb250LXNpemU6IDAuODVyZW07IGJvcmRlci10b3A6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOyBiYWNrZ3JvdW5kOiB2YXIoLS1iZy1jYXJkKTsgfQ0KICAgICAgICBzZWN0aW9uOnRhcmdldCB7IGFuaW1hdGlvbjogaGlnaGxpZ2h0LXNlY3Rpb24gMS41cyBlYXNlOyB9DQogICAgICAgIEBrZXlmcmFtZXMgaGlnaGxpZ2h0LXNlY3Rpb24gew0KICAgICAgICAgICAgMCUgeyBib3gtc2hhZG93OiAwIDAgMCAzcHggdmFyKC0tYWNjZW50KTsgYm9yZGVyLXJhZGl1czogMTJweDsgfQ0KICAgICAgICAgICAgMTAwJSB7IGJveC1zaGFkb3c6IG5vbmU7IH0NCiAgICAgICAgfQ0KICAgICAgICAuc2Nyb2xsLWRvd24tYnRuIHsNCiAgICAgICAgICAgIGRpc3BsYXk6IGlubGluZS1mbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBnYXA6IDZweDsNCiAgICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWJnLWNhcmQpOyBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXIpOw0KICAgICAgICAgICAgY29sb3I6IHZhcigtLWFjY2VudCk7IHBhZGRpbmc6IDZweCAxNHB4OyBib3JkZXItcmFkaXVzOiAyMHB4Ow0KICAgICAgICAgICAgZm9udC1zaXplOiAwLjg1cmVtOyB0ZXh0LWRlY29yYXRpb246IG5vbmU7IG1hcmdpbjogMTBweCAwOw0KICAgICAgICAgICAgdHJhbnNpdGlvbjogYWxsIDAuMnM7IGN1cnNvcjogcG9pbnRlcjsNCiAgICAgICAgfQ0KICAgICAgICAuc2Nyb2xsLWRvd24tYnRuOmhvdmVyIHsgYmFja2dyb3VuZDogdmFyKC0tYWNjZW50KTsgY29sb3I6ICNmZmY7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgycHgpOyB9DQogICAgICAgIC5zY3JvbGwtZG93bi1idG4gc3ZnIHsgd2lkdGg6IDE2cHg7IGhlaWdodDogMTZweDsgYW5pbWF0aW9uOiBib3VuY2UgMS41cyBpbmZpbml0ZTsgfQ0KICAgICAgICBAa2V5ZnJhbWVzIGJvdW5jZSB7DQogICAgICAgICAgICAwJSwgMTAwJSB7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgwKTsgfQ0KICAgICAgICAgICAgNTAlIHsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDRweCk7IH0NCiAgICAgICAgfQ0KICAgICAgICAuYmFjay10by10b3Agew0KICAgICAgICAgICAgcG9zaXRpb246IGZpeGVkOyBib3R0b206IDIwcHg7IHJpZ2h0OiAyMHB4Ow0KICAgICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tYWNjZW50KTsgY29sb3I6ICNmZmY7DQogICAgICAgICAgICB3aWR0aDogNDRweDsgaGVpZ2h0OiA0NHB4OyBib3JkZXItcmFkaXVzOiA1MCU7DQogICAgICAgICAgICBkaXNwbGF5OiBmbGV4OyBhbGlnbi1pdGVtczogY2VudGVyOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsNCiAgICAgICAgICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsgZm9udC1zaXplOiAxLjJyZW07DQogICAgICAgICAgICBib3gtc2hhZG93OiAwIDRweCAxMnB4IHJnYmEoMCwwLDAsMC4zKTsNCiAgICAgICAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjJzLCBvcGFjaXR5IDAuMnM7DQogICAgICAgICAgICBvcGFjaXR5OiAwOyBwb2ludGVyLWV2ZW50czogbm9uZTsgei1pbmRleDogMTAwOw0KICAgICAgICB9DQogICAgICAgIC5iYWNrLXRvLXRvcC52aXNpYmxlIHsgb3BhY2l0eTogMTsgcG9pbnRlci1ldmVudHM6IGF1dG87IH0NCiAgICAgICAgLmJhY2stdG8tdG9wOmhvdmVyIHsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC0zcHgpOyBiYWNrZ3JvdW5kOiAjNzliOGZmOyB9DQogICAgICAgIA0KICAgICAgICAvKiDinKggTkVXOiBTY3JvbGxhYmxlIHZpZGVvIGNvbnRhaW5lciAqLw0KICAgICAgICAudmlkZW8tY29udGFpbmVyIHsNCiAgICAgICAgICAgIG1heC1oZWlnaHQ6IDQwMHB4Ow0KICAgICAgICAgICAgb3ZlcmZsb3cteTogYXV0bzsNCiAgICAgICAgICAgIHBhZGRpbmctcmlnaHQ6IDhweDsNCiAgICAgICAgICAgIG1hcmdpbjogMTVweCAwOw0KICAgICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlOw0KICAgICAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tYm9yZGVyKTsNCiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDhweDsNCiAgICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWJnLXNlY29uZGFyeSk7DQogICAgICAgIH0NCiAgICAgICAgLnZpZGVvLWNvbnRhaW5lcjo6LXdlYmtpdC1zY3JvbGxiYXIgeyB3aWR0aDogOHB4OyB9DQogICAgICAgIC52aWRlby1jb250YWluZXI6Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNrIHsNCiAgICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWJnLWNhcmQpOw0KICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNHB4Ow0KICAgICAgICB9DQogICAgICAgIC52aWRlby1jb250YWluZXI6Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iIHsNCiAgICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWFjY2VudCk7DQogICAgICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7DQogICAgICAgIH0NCiAgICAgICAgLnZpZGVvLWNvbnRhaW5lcjo6LXdlYmtpdC1zY3JvbGxiYXItdGh1bWI6aG92ZXIgew0KICAgICAgICAgICAgYmFja2dyb3VuZDogIzc5YjhmZjsNCiAgICAgICAgfQ0KICAgICAgICAudmlkZW8tY29udGFpbmVyOjphZnRlciB7DQogICAgICAgICAgICBjb250ZW50OiAnJzsNCiAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsNCiAgICAgICAgICAgIGJvdHRvbTogMDsNCiAgICAgICAgICAgIGxlZnQ6IDA7DQogICAgICAgICAgICByaWdodDogMDsNCiAgICAgICAgICAgIGhlaWdodDogNjBweDsNCiAgICAgICAgICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sIHRyYW5zcGFyZW50LCB2YXIoLS1iZy1zZWNvbmRhcnkpKTsNCiAgICAgICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lOw0KICAgICAgICAgICAgb3BhY2l0eTogMC42Ow0KICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogMCAwIDhweCA4cHg7DQogICAgICAgIH0NCiAgICAgICAgLnZpZGVvLXNjcm9sbC1oaW50IHsNCiAgICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjsNCiAgICAgICAgICAgIGZvbnQtc2l6ZTogMC44NXJlbTsNCiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS10ZXh0LXNlY29uZGFyeSk7DQogICAgICAgICAgICBtYXJnaW46IDhweCAwOw0KICAgICAgICAgICAgZGlzcGxheTogZmxleDsNCiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7DQogICAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsNCiAgICAgICAgICAgIGdhcDogNnB4Ow0KICAgICAgICB9DQogICAgICAgIC52aWRlby1zY3JvbGwtaGludCBzdmcgew0KICAgICAgICAgICAgd2lkdGg6IDE0cHg7DQogICAgICAgICAgICBoZWlnaHQ6IDE0cHg7DQogICAgICAgICAgICBhbmltYXRpb246IGJvdW5jZSAycyBpbmZpbml0ZTsNCiAgICAgICAgfQ0KICAgICAgICANCiAgICAgICAgQG1lZGlhIChtYXgtd2lkdGg6IDc2OHB4KSB7DQogICAgICAgICAgICAuY29udGFpbmVyIHsgYm9yZGVyLXJhZGl1czogMDsgfQ0KICAgICAgICAgICAgbmF2IHVsIHsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgZ2FwOiA4cHg7IH0NCiAgICAgICAgICAgIG1haW4geyBwYWRkaW5nOiAyMHB4OyB9DQogICAgICAgICAgICBoZWFkZXIgaDEgeyBmb250LXNpemU6IDEuOHJlbTsgfQ0KICAgICAgICAgICAgLnZpZGVvLWNhcmQgeyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyB0ZXh0LWFsaWduOiBjZW50ZXI7IH0NCiAgICAgICAgICAgIC5iYWNrLXRvLXRvcCB7IGJvdHRvbTogMTVweDsgcmlnaHQ6IDE1cHg7IHdpZHRoOiA0MHB4OyBoZWlnaHQ6IDQwcHg7IH0NCiAgICAgICAgICAgIC52aWRlby1jb250YWluZXIgeyBtYXgtaGVpZ2h0OiAzMDBweDsgfQ0KICAgICAgICB9DQogICAgPC9zdHlsZT4NCjwvaGVhZD4NCjxib2R5Pg0KICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+DQogICAgICAgIDxoZWFkZXI+DQogICAgICAgICAgICA8aDE+QVBLIENsZWFuZXIgJiBVbmluc3RhbGxlciBQcm88L2gxPg0KICAgICAgICAgICAgPHN0cm9uZz5PZmZpY2lhbCBVc2VyIE1hbnVhbCAmIFF1aWNrIFJlZmVyZW5jZSBHdWlkZTwvc3Ryb25nPg0KICAgICAgICA8L2hlYWRlcj4NCiAgICAgICAgPG5hdj4NCiAgICAgICAgICAgIDx1bD4NCiAgICAgICAgICAgICAgICA8bGk+PGEgaHJlZj0iI3NldHVwIj5HZXR0aW5nIFN0YXJ0ZWQ8L2E+PC9saT4NCiAgICAgICAgICAgICAgICA8bGk+PGEgaHJlZj0iI2ludGVyZmFjZSI+SW50ZXJmYWNlIE92ZXJ2aWV3PC9hPjwvbGk+DQogICAgICAgICAgICAgICAgPGxpPjxhIGhyZWY9IiNhcHBzIj5NYW5hZ2luZyBBcHBzPC9hPjwvbGk+DQogICAgICAgICAgICAgICAgPGxpPjxhIGhyZWY9IiNkZWJsb2F0Ij5TeXN0ZW0gRGlzYWJsZXI8L2E+PC9saT4NCiAgICAgICAgICAgICAgICA8bGk+PGEgaHJlZj0iI2luc3RhbGwiPkFQSyBJbnN0YWxsYXRpb248L2E+PC9saT4NCiAgICAgICAgICAgICAgICA8bGk+PGEgaHJlZj0iI3V0aWxpdGllcyI+VXRpbGl0aWVzICYgVG9vbHM8L2E+PC9saT4NCiAgICAgICAgICAgICAgICA8bGk+PGEgaHJlZj0iI3ZpZGVvcyI+8J+TuiBWaWRlbyBUdXRvcmlhbHM8L2E+PC9saT4NCiAgICAgICAgICAgICAgICA8bGk+PGEgaHJlZj0iI2FjdGl2YXRpb24iPvCflJEgQWN0aXZhdGlvbjwvYT48L2xpPg0KICAgICAgICAgICAgICAgIDxsaT48YSBocmVmPSIjZmFxIj5Ucm91Ymxlc2hvb3Rpbmc8L2E+PC9saT4NCiAgICAgICAgICAgIDwvdWw+DQogICAgICAgIDwvbmF2Pg0KICAgICAgICA8bWFpbj4NCiAgICAgICAgICAgIDxzZWN0aW9uIGlkPSJzZXR1cCI+DQogICAgICAgICAgICAgICAgPGgyPvCfk7EgR2V0dGluZyBTdGFydGVkPC9oMj4NCiAgICAgICAgICAgICAgICA8cD5CZWZvcmUgdXNpbmcgdGhlIGFwcGxpY2F0aW9uLCBlbnN1cmUgeW91ciBBbmRyb2lkIGRldmljZSBpcyBwcm9wZXJseSBwcmVwYXJlZDo8L3A+DQogICAgICAgICAgICAgICAgPG9sPg0KICAgICAgICAgICAgICAgICAgICA8bGk+RW5hYmxlIDxzdHJvbmc+RGV2ZWxvcGVyIE9wdGlvbnM8L3N0cm9uZz4gYnkgdGFwcGluZyA8ZW0+QnVpbGQgTnVtYmVyPC9lbT4gNyB0aW1lcyBpbiBTZXR0aW5ncy48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+TmF2aWdhdGUgdG8gPHN0cm9uZz5EZXZlbG9wZXIgT3B0aW9uczwvc3Ryb25nPiBhbmQgdG9nZ2xlIGl0IDxzdHJvbmc+T048L3N0cm9uZz4uPC9saT4NCiAgICAgICAgICAgICAgICAgICAgPGxpPkVuYWJsZSA8c3Ryb25nPlVTQiBEZWJ1Z2dpbmc8L3N0cm9uZz4uPC9saT4NCiAgICAgICAgICAgICAgICAgICAgPGxpPkNvbm5lY3QgeW91ciBwaG9uZSB0byB0aGUgUEMgdmlhIFVTQiBjYWJsZS48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+V2hlbiBwcm9tcHRlZCBvbiB5b3VyIHBob25lLCB0YXAgPHN0cm9uZz5BbGxvdyBVU0IgRGVidWdnaW5nPC9zdHJvbmc+IChjaGVjayAiQWx3YXlzIGFsbG93IiBmb3IgZnV0dXJlIHNlc3Npb25zKS48L2xpPg0KICAgICAgICAgICAgICAgIDwvb2w+DQogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGlwLWJveCI+8J+SoSA8c3Ryb25nPlBybyBUaXA6PC9zdHJvbmc+IElmIGNvbm5lY3Rpb24gZmFpbHMsIHRyeSBkaXNhYmxpbmcgPGVtPlVTQiBEZWJ1Z2dpbmcgU2VjdXJpdHk8L2VtPiBvciBlbmFibGluZyA8ZW0+RGlzYWJsZSBQZXJtaXNzaW9uIE1vbml0b3Jpbmc8L2VtPiBpbiBEZXZlbG9wZXIgT3B0aW9ucy48L2Rpdj4NCiAgICAgICAgICAgIDwvc2VjdGlvbj4NCg0KICAgICAgICAgICAgPHNlY3Rpb24gaWQ9ImludGVyZmFjZSI+DQogICAgICAgICAgICAgICAgPGgyPvCflqXvuI8gSW50ZXJmYWNlIE92ZXJ2aWV3PC9oMj4NCiAgICAgICAgICAgICAgICA8cD5UaGUgbWFpbiB3aW5kb3cgaXMgZGl2aWRlZCBpbnRvIGxvZ2ljYWwgcGFuZWxzIGZvciBxdWljayBuYXZpZ2F0aW9uOjwvcD4NCiAgICAgICAgICAgICAgICA8dWw+DQogICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPlRvcCBCYXI6PC9zdHJvbmc+IERpc3BsYXlzIHlvdXIgdW5pcXVlIEhhcmR3YXJlIElELCBjb25uZWN0aW9uIHN0YXR1cyAoQURCL0NPTSksIHJlZnJlc2ggY29udHJvbHMsIGFuZCB0aGVtZSB0b2dnbGUuPC9saT4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+TGVmdCBQYW5lbDo8L3N0cm9uZz4gUGFja2FnZSBsaXN0IHdpdGggY2hlY2tib3hlcywgc2VhcmNoIGJhciwgYW5kIGNvbG9yLWNvZGVkIGxlZ2VuZC4gUmlnaHQtY2xpY2sgYW55IGFwcCBmb3IgcXVpY2sgYWN0aW9ucy48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+PHN0cm9uZz5SaWdodCBQYW5lbDo8L3N0cm9uZz4gRGV2aWNlIGluZm9ybWF0aW9uLCBwcm9ncmVzcyB0cmFja2luZywgYW5kIHJlYWwtdGltZSBvcGVyYXRpb24gbG9ncy48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+PHN0cm9uZz5Cb3R0b20gQmFyOjwvc3Ryb25nPiBTY3JvbGxpbmcgYW5ub3VuY2VtZW50cyAmIHRpcHMuIENsaWNrIHRvIG9wZW4gdGhlIGZ1bGwgVGlwcyAmIFRyaWNrcyBkaWFsb2cuPC9saT4NCiAgICAgICAgICAgICAgICA8L3VsPg0KICAgICAgICAgICAgICAgIDxoMz7wn46oIENvbG9yIExlZ2VuZCAmIEV4Y2x1c2lvbnM8L2gzPg0KICAgICAgICAgICAgICAgIDxwPkFwcHMgYXJlIGF1dG9tYXRpY2FsbHkgY29sb3ItY29kZWQgYmFzZWQgb24geW91ciBwcm90ZWN0aW9uIHNldHRpbmdzOjwvcD4NCiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsZWdlbmQiPg0KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsZWdlbmQtaXRlbSI+PHNwYW4gY2xhc3M9ImRvdCBncmVlbiI+PC9zcGFuPiBSZW1vdmFibGUgKFNhZmUgdG8gYWN0IG9uKTwvZGl2Pg0KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsZWdlbmQtaXRlbSI+PHNwYW4gY2xhc3M9ImRvdCBvcmFuZ2UiPjwvc3Bhbj4gQ2xlYW4gRXhjbHVkZWQ8L2Rpdj4NCiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0ibGVnZW5kLWl0ZW0iPjxzcGFuIGNsYXNzPSJkb3QgcmVkIj48L3NwYW4+IFVuaW5zdGFsbCBFeGNsdWRlZDwvZGl2Pg0KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJsZWdlbmQtaXRlbSI+PHNwYW4gY2xhc3M9ImRvdCBwdXJwbGUiPjwvc3Bhbj4gQm90aCBFeGNsdWRlZDwvZGl2Pg0KICAgICAgICAgICAgICAgIDwvZGl2Pg0KICAgICAgICAgICAgICAgIDxwPjxlbT5DbGlja2luZyBhIGNvbG9yIGluIHRoZSBsZWdlbmQgZmlsdGVycyB0aGUgbGlzdCB0byBzaG93IG9ubHkgbWF0Y2hpbmcgYXBwcy4gQ2xpY2sgdGhlIHNhbWUgY29sb3IgYWdhaW4gdG8gcmVzZXQuPC9lbT48L3A+DQogICAgICAgICAgICA8L3NlY3Rpb24+DQoNCiAgICAgICAgICAgIDxzZWN0aW9uIGlkPSJhcHBzIj4NCiAgICAgICAgICAgICAgICA8aDI+8J+nuSBNYW5hZ2luZyBJbnN0YWxsZWQgQXBwczwvaDI+DQogICAgICAgICAgICAgICAgPHA+VXNlIHRoZSBtYWluIHRvb2xiYXIgdG8gcGVyZm9ybSBidWxrIG9wZXJhdGlvbnMuIDxzdHJvbmc+Tm90ZTo8L3N0cm9uZz4gVGhlIDxzcGFuIGNsYXNzPSJidG4tZGVtbyI+Q2xlYW48L3NwYW4+IGFuZCA8c3BhbiBjbGFzcz0iYnRuLWRlbW8iPlVuaW5zdGFsbDwvc3Bhbj4gYnV0dG9ucyB0YXJnZXQgPHN0cm9uZz51bmNoZWNrZWQ8L3N0cm9uZz4gYXBwcyBieSBkZWZhdWx0LjwvcD4NCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICA8aDM+MS4gQ2xlYW4gJiBVbmluc3RhbGw8L2gzPg0KICAgICAgICAgICAgICAgIDx1bD4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+Q2xlYW4gKFVuY2hlY2tlZCk6PC9zdHJvbmc+IENsZWFycyBhcHAgY2FjaGUgJiBzdG9yYWdlIGRhdGEgdG8gZnJlZSB1cCBzcGFjZS4gQXV0b21hdGljYWxseSBpbmNsdWRlcyBHb29nbGUgU2VhcmNoLCBZb3VUdWJlLCBhbmQgQ2hyb21lIGlmIGRldGVjdGVkLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPlVuaW5zdGFsbCAoVW5jaGVja2VkKTo8L3N0cm9uZz4gUmVtb3ZlcyBzZWxlY3RlZCB1c2VyIGFwcHMuIElkZWFsIGZvciByZW1vdmluZyBwb3AtdXAgYWR3YXJlIG9yIHVudXNlZCBhcHBsaWNhdGlvbnMuPC9saT4NCiAgICAgICAgICAgICAgICA8L3VsPg0KDQogICAgICAgICAgICAgICAgPGgzPjIuIEV4Y2x1c2lvbiBNYW5hZ2VtZW50PC9oMz4NCiAgICAgICAgICAgICAgICA8cD5Qcm90ZWN0IGltcG9ydGFudCBhcHBzIGZyb20gYWNjaWRlbnRhbCBhY3Rpb25zOjwvcD4NCiAgICAgICAgICAgICAgICA8dWw+DQogICAgICAgICAgICAgICAgICAgIDxsaT5TZWxlY3Qgb25lIG9yIG11bHRpcGxlIHBhY2thZ2VzLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT5DbGljayA8c3BhbiBjbGFzcz0iYnRuLWRlbW8iPuKelSBBZGQgdG8gRXhjbHVkZWQ8L3NwYW4+IGFuZCBjaG9vc2UgPGVtPkNsZWFuPC9lbT4sIDxlbT5Vbmluc3RhbGw8L2VtPiwgb3IgPGVtPkJvdGg8L2VtPi48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+RXhjbHVkZWQgYXBwcyBhcmUgYXV0b21hdGljYWxseSBjaGVja2VkIGFuZCBjb2xvci1jb2RlZC4gUmlnaHQtY2xpY2sg4oaSIDxlbT5SZW1vdmUgZnJvbSBFeGNsdWRlZDwvZW0+IHRvIHJldmVyc2UuPC9saT4NCiAgICAgICAgICAgICAgICA8L3VsPg0KDQogICAgICAgICAgICAgICAgPGgzPjMuIEFwcCBCYWNrdXAgJiBJY29uIFN5bmM8L2gzPg0KICAgICAgICAgICAgICAgIDx1bD4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+8J+SviBCYWNrdXAgQXBwIEFQSzo8L3N0cm9uZz4gUmlnaHQtY2xpY2sgYW55IGFwcCDihpIgPGVtPkJhY2t1cCBBcHAgQVBLPC9lbT4uIFNhdmVzIHNpbmdsZSBvciBzcGxpdCBBUEtzIHRvIHRoZSBiYWNrdXAgZm9sZGVyLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPuKaoSBTaG93IEljb25zOjwvc3Ryb25nPiBGZXRjaGVzIGFuZCBkaXNwbGF5cyBhcHAgaWNvbnMgZGlyZWN0bHkgYmVzaWRlIHBhY2thZ2UgbmFtZXMuIFJlcXVpcmVzIGEgb25lLXRpbWUgaGVscGVyIGluc3RhbGxhdGlvbiBvbiB0aGUgZGV2aWNlLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPvCflI0gSWRlbnRpZnkgSWNvbjo8L3N0cm9uZz4gT3BlbnMgYSBwb3B1cCB0byBpbnNwZWN0IGFuIGFwcCdzIGljb24gYW5kIHNlYXJjaCBmb3IgaXQgb25saW5lLjwvbGk+DQogICAgICAgICAgICAgICAgPC91bD4NCiAgICAgICAgICAgIDwvc2VjdGlvbj4NCg0KICAgICAgICAgICAgPHNlY3Rpb24gaWQ9ImRlYmxvYXQiPg0KICAgICAgICAgICAgICAgIDxoMj7impnvuI8gU3lzdGVtIEFwcCBEaXNhYmxlciAoRGVibG9hdCk8L2gyPg0KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9Indhcm5pbmctYm94Ij7imqDvuI8gPHN0cm9uZz5XQVJOSU5HOjwvc3Ryb25nPiBEaXNhYmxpbmcgb3IgdW5pbnN0YWxsaW5nIHN5c3RlbSBhcHBzIG1heSBjYXVzZSBib290bG9vcHMsIGxvc3Mgb2YgZnVuY3Rpb25hbGl0eSwgb3Igc3lzdGVtIGluc3RhYmlsaXR5LiBQcm9jZWVkIHdpdGggY2F1dGlvbi48L2Rpdj4NCiAgICAgICAgICAgICAgICA8b2w+DQogICAgICAgICAgICAgICAgICAgIDxsaT5DbGljayB0aGUgPHNwYW4gY2xhc3M9ImJ0bi1kZW1vIj7impnvuI8gRGVibG9hdDwvc3Bhbj4gYnV0dG9uLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT5UeXBlIDxjb2RlPllFUzwvY29kZT4gaW4gdGhlIHZlcmlmaWNhdGlvbiBwcm9tcHQgdG8gcHJvY2VlZC48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+VGhlIGxpc3Qgc3dpdGNoZXMgdG8gc3lzdGVtIGFwcHM6IDxzdHJvbmc+8J+Tpjwvc3Ryb25nPiA9IEVuYWJsZWQsIDxzdHJvbmc+8J+UkDwvc3Ryb25nPiA9IERpc2FibGVkLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT5SaWdodC1jbGljayBvciB1c2UgdGhlIHRvb2xiYXIgdG86DQogICAgICAgICAgICAgICAgICAgICAgICA8dWw+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+RGlzYWJsZS9FbmFibGU8L3N0cm9uZz4gc2luZ2xlIG9yIGJhdGNoLWNoZWNrZWQgYXBwcy48L2xpPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPlVuaW5zdGFsbDwvc3Ryb25nPiAocHJvbXB0cyBmb3IgQVBLIGJhY2t1cCBmaXJzdCkuPC9saT4NCiAgICAgICAgICAgICAgICAgICAgICAgIDwvdWw+DQogICAgICAgICAgICAgICAgICAgIDwvbGk+DQogICAgICAgICAgICAgICAgPC9vbD4NCiAgICAgICAgICAgICAgICA8cD48ZW0+RGlzYWJsZWQgYXBwcyBhcmUgYXV0b21hdGljYWxseSBzb3J0ZWQgdG8gdGhlIHRvcC4gSWNvbnMgZnJvbSBwcmV2aW91cyBzeW5jcyBhcmUgcHJlc2VydmVkLjwvZW0+PC9wPg0KICAgICAgICAgICAgPC9zZWN0aW9uPg0KDQogICAgICAgICAgICA8c2VjdGlvbiBpZD0iaW5zdGFsbCI+DQogICAgICAgICAgICAgICAgPGgyPvCfk6YgQVBLIEluc3RhbGxhdGlvbiBNb2RlPC9oMj4NCiAgICAgICAgICAgICAgICA8cD5JbnN0YWxsIG11bHRpcGxlIEFQS3MgZGlyZWN0bHkgZnJvbSBhIGxvY2FsIGZvbGRlcjo8L3A+DQogICAgICAgICAgICAgICAgPG9sPg0KICAgICAgICAgICAgICAgICAgICA8bGk+Q2xpY2sgdGhlIGZvbGRlciBpY29uIG9yIDxzcGFuIGNsYXNzPSJidG4tZGVtbyI+8J+TgiBJbnN0YWxsIEFQS3M8L3NwYW4+IGJ1dHRvbi48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+U2VsZWN0IHRoZSBmb2xkZXIgY29udGFpbmluZyB5b3VyIDxjb2RlPi5hcGs8L2NvZGU+IGZpbGVzLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT5UaGUgbGlzdCBwb3B1bGF0ZXMgd2l0aCBhdmFpbGFibGUgQVBLcy4gQ2hlY2sgdGhlIG9uZXMgeW91IHdhbnQgdG8gaW5zdGFsbC48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+UmlnaHQtY2xpY2sg4oaSIDxlbT5JbnN0YWxsIFRoaXMgQVBLPC9lbT4gb3IgY2xpY2sgPGVtPkluc3RhbGwgQWxsIENoZWNrZWQgQVBLczwvZW0+LjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT5DbGljayB0aGUgZm9sZGVyIGljb24gYWdhaW4gb3IgdXNlIHRoZSBiYWNrIGFycm93IHRvIHJldHVybiB0byB0aGUgZGV2aWNlIGFwcCBsaXN0LjwvbGk+DQogICAgICAgICAgICAgICAgPC9vbD4NCiAgICAgICAgICAgIDwvc2VjdGlvbj4NCg0KICAgICAgICAgICAgPHNlY3Rpb24gaWQ9InV0aWxpdGllcyI+DQogICAgICAgICAgICAgICAgPGgyPvCfm6DvuI8gVXRpbGl0aWVzICYgQWR2YW5jZWQgVG9vbHM8L2gyPg0KICAgICAgICAgICAgICAgIDxwPkFjY2VzcyBleHRyYSBmZWF0dXJlcyB2aWEgdGhlIDxzcGFuIGNsYXNzPSJidG4tZGVtbyI+4ouuPC9zcGFuPiAoTW9yZSBPcHRpb25zKSBtZW51IGluIHRoZSBib3R0b20gdG9vbGJhcjo8L3A+DQogICAgICAgICAgICAgICAgPHRhYmxlPg0KICAgICAgICAgICAgICAgICAgICA8dGhlYWQ+DQogICAgICAgICAgICAgICAgICAgICAgICA8dHI+PHRoPlRvb2w8L3RoPjx0aD5EZXNjcmlwdGlvbjwvdGg+PC90cj4NCiAgICAgICAgICAgICAgICAgICAgPC90aGVhZD4NCiAgICAgICAgICAgICAgICAgICAgPHRib2R5Pg0KICAgICAgICAgICAgICAgICAgICAgICAgPHRyPjx0ZD7wn5KAIEZvcmNlIEtpbGwgQURCPC90ZD48dGQ+U2FmZWx5IHRlcm1pbmF0ZXMgdGhlIGJhY2tncm91bmQgY29ubmVjdGlvbiBkcml2ZXIuIFVzZSBpZiB0aGUgZGV2aWNlIGJlY29tZXMgdW5yZXNwb25zaXZlLiBDbGljayBSZWZyZXNoIGFmdGVyd2FyZC48L3RkPjwvdHI+DQogICAgICAgICAgICAgICAgICAgICAgICA8dHI+PHRkPvCfk7EgU2Ftc3VuZyBBREIgRW5hYmxlcjwvdGQ+PHRkPkFjdGl2YXRlcyBBREIgb24gU2Ftc3VuZyBkZXZpY2VzIHZpYSBBVCBjb21tYW5kcy4gPHN0cm9uZz5QcmVyZXF1aXNpdGU6PC9zdHJvbmc+IERpYWwgPGNvZGU+KiMwKiM8L2NvZGU+IG9uIHRoZSBwaG9uZSBhbmQga2VlcCB0aGUgaGFyZHdhcmUgdGVzdCBtZW51IG9wZW4uPC90ZD48L3RyPg0KICAgICAgICAgICAgICAgICAgICAgICAgPHRyPjx0ZD7wn5SMIFJlZnJlc2ggQURCL0NPTTwvdGQ+PHRkPk1hbnVhbGx5IHNjYW5zIGZvciBjb25uZWN0ZWQgZGV2aWNlcyBhbmQgc2VyaWFsIHBvcnRzLjwvdGQ+PC90cj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDx0cj48dGQ+8J+bkSBSZW1vdmUgRlJQPC90ZD48dGQ+QnlwYXNzZXMgRmFjdG9yeSBSZXNldCBQcm90ZWN0aW9uIGJ5IGFkanVzdGluZyBzZXR1cCB3aXphcmQgZmxhZ3MuIEZvbGxvdyBvbi1zY3JlZW4gcHJvbXB0cy48L3RkPjwvdHI+DQogICAgICAgICAgICAgICAgICAgICAgICA8dHI+PHRkPvCfk7ggQmFja3VwIE1lZGlhPC90ZD48dGQ+U2NhbnMgaW50ZXJuYWwgc3RvcmFnZSBmb3IgaW1hZ2VzLCB2aWRlb3MsIFBERnMsIGFuZCB0ZXh0IGZpbGVzLiBTZWxlY3QgaXRlbXMgYW5kIHB1bGwgdGhlbSB0byBQQyBzYWZlbHkuPC90ZD48L3RyPg0KICAgICAgICAgICAgICAgICAgICAgICAgPHRyPjx0ZD7wn5OlIFVwZGF0ZTwvdGQ+PHRkPlN5bmNzIHRoZSBsYXRlc3QgY2xvdWQgZXhjbHVzaW9uIGxpc3QgdG8gcHJldmVudCBhY2NpZGVudGFsIHJlbW92YWwgb2Yga25vd24gY3JpdGljYWwgYXBwcy48L3RkPjwvdHI+DQogICAgICAgICAgICAgICAgICAgICAgICA8dHI+PHRkPvCfkqEgVGlwcyAmIFRyaWNrczwvdGQ+PHRkPk9wZW5zIHRoZSBsaXZlIGd1aWRlIHdpdGggc2V0dXAgaW5zdHJ1Y3Rpb25zLCBkZXZlbG9wZXIgbGlua3MsIGFuZCB0cm91Ymxlc2hvb3Rpbmcgbm90ZXMuPC90ZD48L3RyPg0KICAgICAgICAgICAgICAgICAgICAgICAgPHRyPjx0ZD7wn5al77iPIHNjcmNweSAvIERldmljZSBNYW5hZ2VyPC90ZD48dGQ+UXVpY2stbGF1bmNoIGJ1dHRvbnMgZm9yIHNjcmVlbiBtaXJyb3JpbmcgYW5kIFdpbmRvd3MgaGFyZHdhcmUgbWFuYWdlbWVudC48L3RkPjwvdHI+DQogICAgICAgICAgICAgICAgICAgIDwvdGJvZHk+DQogICAgICAgICAgICAgICAgPC90YWJsZT4NCiAgICAgICAgICAgICAgICA8cD48ZW0+RGFyay9MaWdodCBtb2RlIGNhbiBiZSB0b2dnbGVkIGFueXRpbWUgdXNpbmcgdGhlIGNoZWNrYm94IGluIHRoZSB0b3AtcmlnaHQgY29ybmVyLjwvZW0+PC9wPg0KICAgICAgICAgICAgPC9zZWN0aW9uPg0KDQogICAgICAgICAgICA8c2VjdGlvbiBpZD0idmlkZW9zIj4NCiAgICAgICAgICAgICAgICA8aDI+8J+TuiBWaWRlbyBUdXRvcmlhbHM8L2gyPg0KICAgICAgICAgICAgICAgIA0KICAgICAgICAgICAgICAgIDxkaXYgc3R5bGU9InRleHQtYWxpZ246IGNlbnRlcjsgbWFyZ2luLWJvdHRvbTogMTVweDsiPg0KICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSIjdmlkZW9zIiBjbGFzcz0ic2Nyb2xsLWRvd24tYnRuIj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIj4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTIgNXYxNE01IDEybDcgNyA3LTciLz4NCiAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPg0KICAgICAgICAgICAgICAgICAgICAgICAgSnVtcCB0byBWaWRlb3MNCiAgICAgICAgICAgICAgICAgICAgPC9hPg0KICAgICAgICAgICAgICAgIDwvZGl2Pg0KICAgICAgICAgICAgICAgIA0KICAgICAgICAgICAgICAgIDxwPldhdGNoIHN0ZXAtYnktc3RlcCBndWlkZXMgdG8gbWFzdGVyIEFQSyBDbGVhbmVyICYgVW5pbnN0YWxsZXIgUHJvOjwvcD4NCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICA8IS0tIOKcqCBTY3JvbGxhYmxlIHZpZGVvIGNvbnRhaW5lciAtLT4NCiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ2aWRlby1jb250YWluZXIiIGlkPSJ2aWRlb1Njcm9sbENvbnRhaW5lciI+DQogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InZpZGVvLWNhcmQiPg0KICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Imh0dHBzOi8vaW1nLnlvdXR1YmUuY29tL3ZpL1lmV1lnNmlCcTVrL21xZGVmYXVsdC5qcGciIGFsdD0iVHV0b3JpYWwgVGh1bWJuYWlsIj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImluZm8iPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9WWZXWWc2aUJxNWsmbGlzdD1QTHEwNWtZVURpRjRTMS1NUDhHX1M4NDdMS2xNYnRFOTBPJmluZGV4PTIiIHRhcmdldD0iX2JsYW5rIj7ilrbvuI8gRnVsbCBUdXRvcmlhbCBQbGF5bGlzdDwvYT4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0iZGVzYyI+Q29tcGxldGUgd2Fsa3Rocm91Z2g6IFNldHVwLCBBcHAgTWFuYWdlbWVudCwgRGVibG9hdGluZywgQmFja3VwICYgQWR2YW5jZWQgVG9vbHM8L3NwYW4+DQogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InZpZGVvLWNhcmQiPg0KICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Imh0dHBzOi8vaW1nLnlvdXR1YmUuY29tL3ZpL29NRUIycW1DajlrL21xZGVmYXVsdC5qcGciIGFsdD0iVHV0b3JpYWwgVGh1bWJuYWlsIj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImluZm8iPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9b01FQjJxbUNqOWsiIHRhcmdldD0iX2JsYW5rIj7ilrbvuI8gUG9wLXVwIFZpcnVzIFJlbW92ZXIgd2l0aCBpY29uczwvYT4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0iZGVzYyI+TGVhcm4gaG93IHRvIHJlbW92ZSBhbm5veWluZyBwb3AtdXAgYWRzIGFuZCB2aXJ1c2VzIHVzaW5nIHRoZSBjbGVhbmVyPC9zcGFuPg0KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICAgICAgICAgIDwvZGl2Pg0KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ2aWRlby1jYXJkIj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSJodHRwczovL2ltZy55b3V0dWJlLmNvbS92aS9zci0zdzdPb05ncy9tcWRlZmF1bHQuanBnIiBhbHQ9IlR1dG9yaWFsIFRodW1ibmFpbCI+DQogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJpbmZvIj4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PXNyLTN3N09vTmdzIiB0YXJnZXQ9Il9ibGFuayI+4pa277iPIFNhbXN1bmcgQURCIEVuYWJsZXIgYW5kIEZSUCBCeXBhc3M8L2E+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9ImRlc2MiPlN0ZXAtYnktc3RlcCBndWlkZSBmb3IgU2Ftc3VuZyBkZXZpY2VzOiBlbmFibGluZyBBREIgYW5kIGJ5cGFzc2luZyBGUlAgbG9jazwvc3Bhbj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2Pg0KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ2aWRlby1jYXJkIj4NCiAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSJodHRwczovL2ltZy55b3V0dWJlLmNvbS92aS9jaUZvS3kzdjVUby9tcWRlZmF1bHQuanBnIiBhbHQ9IlBlcm0gU2NhbiI+DQogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJpbmZvIj4NCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PWNpRm9LeTN2NVRvIiB0YXJnZXQ9Il9ibGFuayI+4pa277iPIExhdGVzdCBVcGRhdGUgSnVuZSAwNCwgMjAyNiBBZGRlZCBQZXJtIFNjYW48L2E+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9ImRlc2MiPkxhdGVzdCBVcGRhdGUgSnVuZSAwNCwgMjAyNiBBZGRlZCBQZXJtIFNjYW48L3NwYW4+DQogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICAgICAgDQogICAgICAgICAgICAgICAgPCEtLSDinKggU2Nyb2xsIGhpbnQgLS0+DQogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idmlkZW8tc2Nyb2xsLWhpbnQiPg0KICAgICAgICAgICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+DQogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTIgNXYxNE0xOSAxMmwtNyA3LTctNyIvPg0KICAgICAgICAgICAgICAgICAgICA8L3N2Zz4NCiAgICAgICAgICAgICAgICAgICAgPHNwYW4+U2Nyb2xsIGRvd24gdG8gc2VlIG1vcmUgdmlkZW9zPC9zcGFuPg0KICAgICAgICAgICAgICAgICAgICA8c3ZnIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiI+DQogICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTIgNXYxNE0xOSAxMmwtNyA3LTctNyIvPg0KICAgICAgICAgICAgICAgICAgICA8L3N2Zz4NCiAgICAgICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0aXAtYm94Ij4NCiAgICAgICAgICAgICAgICAgICAg8J+SoSA8c3Ryb25nPlJlY29tbWVuZGF0aW9uOjwvc3Ryb25nPiBXYXRjaCB0aGUgcGxheWxpc3QgaW4gb3JkZXIgZm9yIHRoZSBiZXN0IGxlYXJuaW5nIGV4cGVyaWVuY2UuIFZpZGVvcyBjb3ZlciBjb25uZWN0aW9uIHNldHVwLCBleGNsdXNpb24gbWFuYWdlbWVudCwgc3lzdGVtIGFwcCBzYWZldHksIGFuZCB0cm91Ymxlc2hvb3RpbmcuDQogICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICA8L3NlY3Rpb24+DQoNCiAgICAgICAgICAgIDxzZWN0aW9uIGlkPSJhY3RpdmF0aW9uIj4NCiAgICAgICAgICAgICAgICA8aDI+8J+UkSBBY3RpdmF0aW9uICYgU3VwcG9ydDwvaDI+DQogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iYWN0aXZhdGlvbi1ib3giPg0KICAgICAgICAgICAgICAgICAgICA8aDM+8J+OgSBHZXQgWW91ciBMaWNlbnNlPC9oMz4NCiAgICAgICAgICAgICAgICAgICAgPHAgc3R5bGU9ImNvbG9yOiAjZTBlN2ZmOyBtYXJnaW4tYm90dG9tOiA4cHg7Ij5OZWVkIGZ1bGwgYWN0aXZhdGlvbiBvciBoYXZpbmcgaXNzdWVzIHdpdGggeW91ciB0cmlhbD88L3A+DQogICAgICAgICAgICAgICAgICAgIDxwIHN0eWxlPSJjb2xvcjogI2NiZDVlMTsgZm9udC1zaXplOiAwLjk1cmVtOyI+Q29udGFjdCB0aGUgZGV2ZWxvcGVyIGRpcmVjdGx5IGZvciBhY3RpdmF0aW9uIHN1cHBvcnQsIGxpY2Vuc2UgcHVyY2hhc2UsIG9yIHRlY2huaWNhbCBhc3Npc3RhbmNlLjwvcD4NCiAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2phaXJhaC5tYXpvLjUvIiB0YXJnZXQ9Il9ibGFuayI+8J+SrCBDb250YWN0IERldmVsb3BlciBvbiBGYWNlYm9vazwvYT4NCiAgICAgICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICA8aDM+4oS577iPIEFjdGl2YXRpb24gTm90ZXM8L2gzPg0KICAgICAgICAgICAgICAgIDx1bD4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+VHJpYWwgTW9kZTo8L3N0cm9uZz4gTmV3IHVzZXJzIHJlY2VpdmUgbGltaXRlZCB0cmlhbCB1c2VzLiBUaGUgY291bnRlciBhcHBlYXJzIG9uIGZpcnN0IGxhdW5jaC48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+PHN0cm9uZz5IV0lEIEJpbmRpbmc6PC9zdHJvbmc+IFlvdXIgYWN0aXZhdGlvbiBpcyB0aWVkIHRvIHlvdXIgUEMncyB1bmlxdWUgSGFyZHdhcmUgSUQgKGRpc3BsYXllZCBpbiB0aGUgdG9wIGJhcikuPC9saT4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+T2ZmbGluZSBVc2U6PC9zdHJvbmc+IE9uY2UgYWN0aXZhdGVkLCB0aGUgYXBwIHdvcmtzIG9mZmxpbmUuPC9saT4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+UmUtYWN0aXZhdGlvbjo8L3N0cm9uZz4gSWYgeW91IGNoYW5nZSBtYWpvciBoYXJkd2FyZSBjb21wb25lbnRzLCBjb250YWN0IHN1cHBvcnQgdG8gcmVzZXQgeW91ciBIV0lELjwvbGk+DQogICAgICAgICAgICAgICAgPC91bD4NCiAgICAgICAgICAgICAgICANCiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0aXAtYm94Ij4NCiAgICAgICAgICAgICAgICAgICAg8J+SoSA8c3Ryb25nPkJlZm9yZSBDb250YWN0aW5nIFN1cHBvcnQ6PC9zdHJvbmc+IEhhdmUgeW91ciBIV0lEIHJlYWR5IChjbGljayDwn5OLIHRvIGNvcHkpLiBJbmNsdWRlIHlvdXIgV2luZG93cyB2ZXJzaW9uIGFuZCBBbmRyb2lkIGRldmljZSBtb2RlbCBmb3IgZmFzdGVyIGFzc2lzdGFuY2UuDQogICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICA8L3NlY3Rpb24+DQoNCiAgICAgICAgICAgIDxzZWN0aW9uIGlkPSJmYXEiPg0KICAgICAgICAgICAgICAgIDxoMj7inZMgVHJvdWJsZXNob290aW5nICYgVGlwczwvaDI+DQogICAgICAgICAgICAgICAgPHVsPg0KICAgICAgICAgICAgICAgICAgICA8bGk+PHN0cm9uZz4iTm8gZGV2aWNlIGRldGVjdGVkIjo8L3N0cm9uZz4gRW5zdXJlIFVTQiBjYWJsZSBpcyBkYXRhLWNhcGFibGUsIFVTQiBkZWJ1Z2dpbmcgaXMgZW5hYmxlZCwgYW5kIHRoZSBwaG9uZSBpcyB1bmxvY2tlZC4gVHJ5IGEgZGlmZmVyZW50IFVTQiBwb3J0LjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPiJDbGVhbmluZyBmYWlsZWQiIHBvcHVwOjwvc3Ryb25nPiBTb21lIEFuZHJvaWQgc2tpbnMgYmxvY2sgc3RvcmFnZSBjbGVhcmluZy4gRW5hYmxlIDxlbT5EaXNhYmxlIFBlcm1pc3Npb24gTW9uaXRvcmluZzwvZW0+IG9yIGRpc2FibGUgPGVtPlVTQiBEZWJ1Z2dpbmcgU2VjdXJpdHk8L2VtPi48L2xpPg0KICAgICAgICAgICAgICAgICAgICA8bGk+PHN0cm9uZz5BcHBzIG1pc3NpbmcgaWNvbnMgYWZ0ZXIgc3luYzo8L3N0cm9uZz4gVGhlIGhlbHBlciByZXF1aXJlcyB+MTAtMzAgc2Vjb25kcyB0byBleHBvcnQgaWNvbnMuIFdhaXQgZm9yIHRoZSAiRE9ORSIgY29uZmlybWF0aW9uIGJlZm9yZSBjbG9zaW5nLjwvbGk+DQogICAgICAgICAgICAgICAgICAgIDxsaT48c3Ryb25nPkJhdGNoIG9wZXJhdGlvbnMgc3R1Y2s6PC9zdHJvbmc+IFVzZSA8c3BhbiBjbGFzcz0iYnRuLWRlbW8iPvCfkoAgRm9yY2UgS2lsbCBBREI8L3NwYW4+LCB3YWl0IDIgc2Vjb25kcywgdGhlbiBjbGljayA8c3BhbiBjbGFzcz0iYnRuLWRlbW8iPvCflIQgUmVmcmVzaDwvc3Bhbj4uPC9saT4NCiAgICAgICAgICAgICAgICAgICAgPGxpPjxzdHJvbmc+Q2xvc2luZyB0aGUgYXBwOjwvc3Ryb25nPiBZb3Ugd2lsbCBiZSBwcm9tcHRlZCB0byBkaXNhYmxlIERldmVsb3BlciBPcHRpb25zIGF1dG9tYXRpY2FsbHkgZm9yIHNlY3VyaXR5IChyZWNvbW1lbmRlZCBmb3IgYmFua2luZy9HQ2FzaCBhcHBzKS48L2xpPg0KICAgICAgICAgICAgICAgIDwvdWw+DQogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGlwLWJveCI+8J+SoSA8c3Ryb25nPkJlc3QgUHJhY3RpY2U6PC9zdHJvbmc+IEFsd2F5cyBiYWNrdXAgaW1wb3J0YW50IGFwcHMgdmlhIHRoZSByaWdodC1jbGljayBtZW51IGJlZm9yZSBwZXJmb3JtaW5nIGJ1bGsgdW5pbnN0YWxscyBvciBzeXN0ZW0gZGVibG9hdGluZy48L2Rpdj4NCiAgICAgICAgICAgIDwvc2VjdGlvbj4NCiAgICAgICAgPC9tYWluPg0KICAgICAgICA8Zm9vdGVyPg0KICAgICAgICAgICAgPHA+QVBLIENsZWFuZXIgJiBVbmluc3RhbGxlciBQcm8gJmNvcHk7IGJ5IGRyb3gtUGgtQ2ViPGJyPg0KICAgICAgICAgICAgVXNlIHN5c3RlbSB0b29scyByZXNwb25zaWJseS48YnI+DQogICAgICAgICAgICA8YSBocmVmPSJodHRwczovL3d3dy5tZWRpYWZpcmUuY29tL2ZpbGUvdG52em9tamswNzV1bGdrL0FQS19DbGVhbmVyX2FuZF9Vbmluc3RhbGxlcl9TZXR1cF9JbnN0YWxsZXJfUHJvX3Y1LmV4ZS9maWxlIiB0YXJnZXQ9Il9ibGFuayIgc3R5bGU9ImNvbG9yOiB2YXIoLS1hY2NlbnQpOyI+TGF0ZXN0IFVwZGF0ZTwvYT4NCiAgICAgICAgICAgIDxhIGhyZWY9Imh0dHBzOi8vd3d3LmZhY2Vib29rLmNvbS9qYWlyYWgubWF6by41LyIgdGFyZ2V0PSJfYmxhbmsiIHN0eWxlPSJjb2xvcjogdmFyKC0tYWNjZW50KTsiPkNvbnRhY3QgRGV2ZWxvcGVyPC9hPiB8IA0KICAgICAgICAgICAgPGEgaHJlZj0iaHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1ZZldZZzZpQnE1ayZsaXN0PVBMcTA1a1lVRGlGNFMxLU1QOEdfUzg0N0xLbE1idEU5ME8maW5kZXg9MiIgdGFyZ2V0PSJfYmxhbmsiIHN0eWxlPSJjb2xvcjogdmFyKC0tYWNjZW50KTsiPldhdGNoIFR1dG9yaWFsczwvYT48L3A+DQogICAgICAgIDwvZm9vdGVyPg0KICAgIDwvZGl2Pg0KICAgIA0KICAgIDxhIGhyZWY9IiMiIGNsYXNzPSJiYWNrLXRvLXRvcCIgaWQ9ImJhY2tUb1RvcCIgdGl0bGU9IkJhY2sgdG8gVG9wIj7ihpE8L2E+DQogICAgDQogICAgPHNjcmlwdD4NCiAgICAgICAgY29uc3QgYmFja1RvVG9wID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2JhY2tUb1RvcCcpOw0KICAgICAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignc2Nyb2xsJywgKCkgPT4gew0KICAgICAgICAgICAgaWYgKHdpbmRvdy5zY3JvbGxZID4gNDAwKSB7DQogICAgICAgICAgICAgICAgYmFja1RvVG9wLmNsYXNzTGlzdC5hZGQoJ3Zpc2libGUnKTsNCiAgICAgICAgICAgIH0gZWxzZSB7DQogICAgICAgICAgICAgICAgYmFja1RvVG9wLmNsYXNzTGlzdC5yZW1vdmUoJ3Zpc2libGUnKTsNCiAgICAgICAgICAgIH0NCiAgICAgICAgfSk7DQogICAgICAgIGJhY2tUb1RvcC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIChlKSA9PiB7DQogICAgICAgICAgICBlLnByZXZlbnREZWZhdWx0KCk7DQogICAgICAgICAgICB3aW5kb3cuc2Nyb2xsVG8oeyB0b3A6IDAsIGJlaGF2aW9yOiAnc21vb3RoJyB9KTsNCiAgICAgICAgfSk7DQogICAgPC9zY3JpcHQ+DQo8L2JvZHk+DQo8L2h0bWw+DQo=";
+            <section id="interface">
+                <h2>🖥️ Interface Overview</h2>
+                <p>The main window is divided into logical panels for quick navigation:</p>
+                <ul>
+                    <li><strong>Top Bar:</strong> Displays your unique Hardware ID, connection status (ADB/COM), refresh controls, and theme toggle.</li>
+                    <li><strong>Left Panel:</strong> Package list with checkboxes, search bar, and color-coded legend. Right-click any app for quick actions.</li>
+                    <li><strong>Right Panel:</strong> Device information, progress tracking, and real-time operation logs.</li>
+                    <li><strong>Bottom Bar:</strong> Scrolling announcements & tips. Click to open the full Tips & Tricks dialog.</li>
+                </ul>
+                <h3>🎨 Color Legend & Exclusions</h3>
+                <p>Apps are automatically color-coded based on your protection settings:</p>
+                <div class="legend">
+                    <div class="legend-item"><span class="dot green"></span> Removable (Safe to act on)</div>
+                    <div class="legend-item"><span class="dot orange"></span> Clean Excluded</div>
+                    <div class="legend-item"><span class="dot red"></span> Uninstall Excluded</div>
+                    <div class="legend-item"><span class="dot purple"></span> Both Excluded</div>
+                </div>
+                <p><em>Clicking a color in the legend filters the list to show only matching apps. Click the same color again to reset.</em></p>
+            </section>
 
-const bytes = Uint8Array.from(
-    atob(data),
-    c => c.charCodeAt(0)
-);
+            <section id="apps">
+                <h2>🧹 Managing Installed Apps</h2>
+                <p>Use the main toolbar to perform bulk operations. <strong>Note:</strong> The <span class="btn-demo">Clean</span> and <span class="btn-demo">Uninstall</span> buttons target <strong>unchecked</strong> apps by default.</p>
+                
+                <h3>1. Clean & Uninstall</h3>
+                <ul>
+                    <li><strong>Clean (Unchecked):</strong> Clears app cache & storage data to free up space. Automatically includes Google Search, YouTube, and Chrome if detected.</li>
+                    <li><strong>Uninstall (Unchecked):</strong> Removes selected user apps. Ideal for removing pop-up adware or unused applications.</li>
+                </ul>
 
-const decoded = new TextDecoder("utf-8").decode(bytes);
+                <h3>2. Exclusion Management</h3>
+                <p>Protect important apps from accidental actions:</p>
+                <ul>
+                    <li>Select one or multiple packages.</li>
+                    <li>Click <span class="btn-demo">➕ Add to Excluded</span> and choose <em>Clean</em>, <em>Uninstall</em>, or <em>Both</em>.</li>
+                    <li>Excluded apps are automatically checked and color-coded. Right-click → <em>Remove from Excluded</em> to reverse.</li>
+                </ul>
 
-document.open();
-document.write(decoded);
-document.close();
-</script>
+                <h3>3. App Backup & Icon Sync</h3>
+                <ul>
+                    <li><strong>💾 Backup App APK:</strong> Right-click any app → <em>Backup App APK</em>. Saves single or split APKs to the backup folder.</li>
+                    <li><strong>⚡ Show Icons:</strong> Fetches and displays app icons directly beside package names. Requires a one-time helper installation on the device.</li>
+                    <li><strong>🔍 Identify Icon:</strong> Opens a popup to inspect an app's icon and search for it online.</li>
+                </ul>
+            </section>
 
+            <section id="debloat">
+                <h2>⚙️ System App Disabler (Debloat)</h2>
+                <div class="warning-box">⚠️ <strong>WARNING:</strong> Disabling or uninstalling system apps may cause bootloops, loss of functionality, or system instability. Proceed with caution.</div>
+                <ol>
+                    <li>Click the <span class="btn-demo">⚙️ Debloat</span> button.</li>
+                    <li>Type <code>YES</code> in the verification prompt to proceed.</li>
+                    <li>The list switches to system apps: <strong>📦</strong> = Enabled, <strong>🔐</strong> = Disabled.</li>
+                    <li>Right-click or use the toolbar to:
+                        <ul>
+                            <li><strong>Disable/Enable</strong> single or batch-checked apps.</li>
+                            <li><strong>Uninstall</strong> (prompts for APK backup first).</li>
+                        </ul>
+                    </li>
+                </ol>
+                <p><em>Disabled apps are automatically sorted to the top. Icons from previous syncs are preserved.</em></p>
+            </section>
+
+            <section id="install">
+                <h2>📦 APK Installation Mode</h2>
+                <p>Install multiple APKs directly from a local folder:</p>
+                <ol>
+                    <li>Click the folder icon or <span class="btn-demo">📂 Install APKs</span> button.</li>
+                    <li>Select the folder containing your <code>.apk</code> files.</li>
+                    <li>The list populates with available APKs. Check the ones you want to install.</li>
+                    <li>Right-click → <em>Install This APK</em> or click <em>Install All Checked APKs</em>.</li>
+                    <li>Click the folder icon again or use the back arrow to return to the device app list.</li>
+                </ol>
+            </section>
+
+            <section id="utilities">
+                <h2>🛠️ Utilities & Advanced Tools</h2>
+                <p>Access extra features via the <span class="btn-demo">⋮</span> (More Options) menu in the bottom toolbar:</p>
+                <table>
+                    <thead>
+                        <tr><th>Tool</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>💀 Force Kill ADB</td><td>Safely terminates the background connection driver. Use if the device becomes unresponsive. Click Refresh afterward.</td></tr>
+                        <tr><td>📱 Samsung ADB Enabler</td><td>Activates ADB on Samsung devices via AT commands. <strong>Prerequisite:</strong> Dial <code>*#0*#</code> on the phone and keep the hardware test menu open.</td></tr>
+                        <tr><td>🔌 Refresh ADB/COM</td><td>Manually scans for connected devices and serial ports.</td></tr>
+                        <tr><td>🛑 Remove FRP</td><td>Bypasses Factory Reset Protection by adjusting setup wizard flags. Follow on-screen prompts.</td></tr>
+                        <tr><td>📸 Backup Media</td><td>Scans internal storage for images, videos, PDFs, and text files. Select items and pull them to PC safely.</td></tr>
+                        <tr><td>📥 Update</td><td>Syncs the latest cloud exclusion list to prevent accidental removal of known critical apps.</td></tr>
+                        <tr><td>💡 Tips & Tricks</td><td>Opens the live guide with setup instructions, developer links, and troubleshooting notes.</td></tr>
+                        <tr><td>🖥️ scrcpy / Device Manager</td><td>Quick-launch buttons for screen mirroring and Windows hardware management.</td></tr>
+                    </tbody>
+                </table>
+                <p><em>Dark/Light mode can be toggled anytime using the checkbox in the top-right corner.</em></p>
+            </section>
+
+            <section id="videos">
+                <h2>📺 Video Tutorials</h2>
+                
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <a href="#videos" class="scroll-down-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                        Jump to Videos
+                    </a>
+                </div>
+                
+                <p>Watch step-by-step guides to master APK Cleaner & Uninstaller Pro:</p>
+                
+                <!-- ✨ Scrollable video container -->
+                <div class="video-container" id="videoScrollContainer">
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/YfWYg6iBq5k/mqdefault.jpg" alt="Tutorial Thumbnail">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=YfWYg6iBq5k&list=PLq05kYUDiF4S1-MP8G_S847LKlMbtE90O&index=2" target="_blank">▶️ Full Tutorial Playlist</a>
+                            <span class="desc">Complete walkthrough: Setup, App Management, Debloating, Backup & Advanced Tools</span>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/oMEB2qmCj9k/mqdefault.jpg" alt="Tutorial Thumbnail">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=oMEB2qmCj9k" target="_blank">▶️ Pop-up Virus Remover with icons</a>
+                            <span class="desc">Learn how to remove annoying pop-up ads and viruses using the cleaner</span>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/sr-3w7OoNgs/mqdefault.jpg" alt="Tutorial Thumbnail">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=sr-3w7OoNgs" target="_blank">▶️ Samsung ADB Enabler and FRP Bypass</a>
+                            <span class="desc">Step-by-step guide for Samsung devices: enabling ADB and bypassing FRP lock</span>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/ciFoKy3v5To/mqdefault.jpg" alt="Perm Scan">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=ciFoKy3v5To" target="_blank">▶️ Latest Update June 04, 2026 Added Perm Scan</a>
+                            <span class="desc">Latest Update June 04, 2026 Added Perm Scan</span>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <img src="https://img.youtube.com/vi/e1r-Ldq7fG4/mqdefault.jpg" alt="Latest Update June 05, 2026 Added APK info">
+                        <div class="info">
+                            <a href="https://www.youtube.com/watch?v=e1r-Ldq7fG4" target="_blank">▶️ Latest Update June 05, 2026 Added APK info</a>
+                            <span class="desc">▶️ Latest Update June 05, 2026 Added APK info</a></span>
+                        </div>
+                    </div>
+                
+                <!-- ✨ Scroll hint -->
+                <div class="video-scroll-hint">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
+                    <span>Scroll down to see more videos</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
+                </div>
+                
+                <div class="tip-box">
+                    💡 <strong>Recommendation:</strong> Watch the playlist in order for the best learning experience. Videos cover connection setup, exclusion management, system app safety, and troubleshooting.
+                </div>
+            </section>
+
+            <section id="activation">
+                <h2>🔑 Activation & Support</h2>
+                <div class="activation-box">
+                    <h3>🎁 Get Your License</h3>
+                    <p style="color: #e0e7ff; margin-bottom: 8px;">Need full activation or having issues with your trial?</p>
+                    <p style="color: #cbd5e1; font-size: 0.95rem;">Contact the developer directly for activation support, license purchase, or technical assistance.</p>
+                    <a href="https://www.facebook.com/jairah.mazo.5/" target="_blank">💬 Contact Developer on Facebook</a>
+                </div>
+                
+                <h3>ℹ️ Activation Notes</h3>
+                <ul>
+                    <li><strong>Trial Mode:</strong> New users receive limited trial uses. The counter appears on first launch.</li>
+                    <li><strong>HWID Binding:</strong> Your activation is tied to your PC's unique Hardware ID (displayed in the top bar).</li>
+                    <li><strong>Offline Use:</strong> Once activated, the app works offline.</li>
+                    <li><strong>Re-activation:</strong> If you change major hardware components, contact support to reset your HWID.</li>
+                </ul>
+                
+                <div class="tip-box">
+                    💡 <strong>Before Contacting Support:</strong> Have your HWID ready (click 📋 to copy). Include your Windows version and Android device model for faster assistance.
+                </div>
+            </section>
+
+            <section id="faq">
+                <h2>❓ Troubleshooting & Tips</h2>
+                <ul>
+                    <li><strong>"No device detected":</strong> Ensure USB cable is data-capable, USB debugging is enabled, and the phone is unlocked. Try a different USB port.</li>
+                    <li><strong>"Cleaning failed" popup:</strong> Some Android skins block storage clearing. Enable <em>Disable Permission Monitoring</em> or disable <em>USB Debugging Security</em>.</li>
+                    <li><strong>Apps missing icons after sync:</strong> The helper requires ~10-30 seconds to export icons. Wait for the "DONE" confirmation before closing.</li>
+                    <li><strong>Batch operations stuck:</strong> Use <span class="btn-demo">💀 Force Kill ADB</span>, wait 2 seconds, then click <span class="btn-demo">🔄 Refresh</span>.</li>
+                    <li><strong>Closing the app:</strong> You will be prompted to disable Developer Options automatically for security (recommended for banking/GCash apps).</li>
+                </ul>
+                <div class="tip-box">💡 <strong>Best Practice:</strong> Always backup important apps via the right-click menu before performing bulk uninstalls or system debloating.</div>
+            </section>
+        </main>
+        <footer>
+            <p>APK Cleaner & Uninstaller Pro &copy; by drox-Ph-Ceb<br>
+            Use system tools responsibly.<br>
+            <a href="https://www.mediafire.com/file/ukywb96bwp00wd5/APK_Cleaner_and_Uninstaller_Setup_Installer_v4.rar/file" target="_blank" style="color: var(--accent);">Latest Update</a>
+            <a href="https://www.facebook.com/jairah.mazo.5/" target="_blank" style="color: var(--accent);">Contact Developer</a> | 
+            <a href="https://www.youtube.com/watch?v=YfWYg6iBq5k&list=PLq05kYUDiF4S1-MP8G_S847LKlMbtE90O&index=2" target="_blank" style="color: var(--accent);">Watch Tutorials</a></p>
+        </footer>
+    </div>
+    
+    <a href="#" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
+    
+    <script>
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
