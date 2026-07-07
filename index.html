@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APK Cleaner & Uninstaller Pro - User Manual</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>APK Cleaner &amp; Uninstaller Pro - User Manual</title>
+<style>
         :root {
             --bg-primary: #0d1117;
             --bg-secondary: #161b22;
@@ -162,191 +163,59 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>APK Cleaner & Uninstaller Pro</h1>
-            <strong>Official User Manual & Quick Reference Guide</strong>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="#setup">Getting Started</a></li>
-                <li><a href="#interface">Interface Overview</a></li>
-                <li><a href="#apps">Managing Apps</a></li>
-                <li><a href="#debloat">System Disabler</a></li>
-                <li><a href="#install">APK Installation</a></li>
-                <li><a href="#utilities">Utilities & Tools</a></li>
-                <li><a href="#activation">🔑 Activation</a></li>
-                <li><a href="#faq">Troubleshooting</a></li>
-            </ul>
-        </nav>
-        <main>
-            <section id="setup">
-                <h2>📱 Getting Started</h2>
-                <p>Before using the application, ensure your Android device is properly prepared:</p>
-                <ol>
-                    <li>Enable <strong>Developer Options</strong> by tapping <em>Build Number</em> 7 times in Settings.</li>
-                    <li>Navigate to <strong>Developer Options</strong> and toggle it <strong>ON</strong>.</li>
-                    <li>Enable <strong>USB Debugging</strong>.</li>
-                    <li>Connect your phone to the PC via USB cable.</li>
-                    <li>When prompted on your phone, tap <strong>Allow USB Debugging</strong> (check "Always allow" for future sessions).</li>
-                </ol>
-                <div class="tip-box">💡 <strong>Pro Tip:</strong> If connection fails, try disabling <em>USB Debugging Security</em> or enabling <em>Disable Permission Monitoring</em> in Developer Options.</div>
-            </section>
-
-            <section id="interface">
-                <h2>🖥️ Interface Overview</h2>
-                <p>The main window is divided into logical panels for quick navigation:</p>
-                <ul>
-                    <li><strong>Top Bar:</strong> Displays your unique Hardware ID, connection status (ADB/COM), refresh controls, and theme toggle.</li>
-                    <li><strong>Left Panel:</strong> Package list with checkboxes, search bar, and color-coded legend. Right-click any app for quick actions.</li>
-                    <li><strong>Right Panel:</strong> Device information, progress tracking, and real-time operation logs.</li>
-                    <li><strong>Bottom Bar:</strong> Scrolling announcements & tips. Click to open the full Tips & Tricks dialog.</li>
-                </ul>
-                <h3>🎨 Color Legend & Exclusions</h3>
-                <p>Apps are automatically color-coded based on your protection settings:</p>
-                <div class="legend">
-                    <div class="legend-item"><span class="dot green"></span> Removable (Safe to act on)</div>
-                    <div class="legend-item"><span class="dot orange"></span> Clean Excluded</div>
-                    <div class="legend-item"><span class="dot red"></span> Uninstall Excluded</div>
-                    <div class="legend-item"><span class="dot purple"></span> Both Excluded</div>
-                </div>
-                <p><em>Clicking a color in the legend filters the list to show only matching apps. Click the same color again to reset.</em></p>
-            </section>
-
-            <section id="apps">
-                <h2>🧹 Managing Installed Apps</h2>
-                <p>Use the main toolbar to perform bulk operations. <strong>Note:</strong> The <span class="btn-demo">Clean</span> and <span class="btn-demo">Uninstall</span> buttons target <strong>unchecked</strong> apps by default.</p>
-                
-                <h3>1. Clean & Uninstall</h3>
-                <ul>
-                    <li><strong>Clean (Unchecked):</strong> Clears app cache & storage data to free up space. Automatically includes Google Search, YouTube, and Chrome if detected.</li>
-                    <li><strong>Uninstall (Unchecked):</strong> Removes selected user apps. Ideal for removing pop-up adware or unused applications.</li>
-                </ul>
-
-                <h3>2. Exclusion Management</h3>
-                <p>Protect important apps from accidental actions:</p>
-                <ul>
-                    <li>Select one or multiple packages.</li>
-                    <li>Click <span class="btn-demo">➕ Add to Excluded</span> and choose <em>Clean</em>, <em>Uninstall</em>, or <em>Both</em>.</li>
-                    <li>Excluded apps are automatically checked and color-coded. Right-click → <em>Remove from Excluded</em> to reverse.</li>
-                </ul>
-
-                <h3>3. App Backup & Icon Sync</h3>
-                <ul>
-                    <li><strong>💾 Backup App APK:</strong> Right-click any app → <em>Backup App APK</em>. Saves single or split APKs to the backup folder.</li>
-                    <li><strong>⚡ Show Icons:</strong> Fetches and displays app icons directly beside package names. Requires a one-time helper installation on the device.</li>
-                    <li><strong>🔍 Identify Icon:</strong> Opens a popup to inspect an app's icon and search for it online.</li>
-                </ul>
-            </section>
-
-            <section id="debloat">
-                <h2>⚙️ System App Disabler (Debloat)</h2>
-                <div class="warning-box">⚠️ <strong>WARNING:</strong> Disabling or uninstalling system apps may cause bootloops, loss of functionality, or system instability. Proceed with caution.</div>
-                <ol>
-                    <li>Click the <span class="btn-demo">⚙️ Debloat</span> button.</li>
-                    <li>Type <code>YES</code> in the verification prompt to proceed.</li>
-                    <li>The list switches to system apps: <strong>📦</strong> = Enabled, <strong>🔐</strong> = Disabled.</li>
-                    <li>Right-click or use the toolbar to:
-                        <ul>
-                            <li><strong>Disable/Enable</strong> single or batch-checked apps.</li>
-                            <li><strong>Uninstall</strong> (prompts for APK backup first).</li>
-                        </ul>
-                    </li>
-                </ol>
-                <p><em>Disabled apps are automatically sorted to the top. Icons from previous syncs are preserved.</em></p>
-            </section>
-
-            <section id="install">
-                <h2>📦 APK Installation Mode</h2>
-                <p>Install multiple APKs directly from a local folder:</p>
-                <ol>
-                    <li>Click the folder icon or <span class="btn-demo">📂 Install APKs</span> button.</li>
-                    <li>Select the folder containing your <code>.apk</code> files.</li>
-                    <li>The list populates with available APKs. Check the ones you want to install.</li>
-                    <li>Right-click → <em>Install This APK</em> or click <em>Install All Checked APKs</em>.</li>
-                    <li>Click the folder icon again or use the back arrow to return to the device app list.</li>
-                </ol>
-            </section>
-
-            <section id="utilities">
-                <h2>🛠️ Utilities & Advanced Tools</h2>
-                <p>Access extra features via the <span class="btn-demo">⋮</span> (More Options) menu in the bottom toolbar:</p>
-                <table>
-                    <thead>
-                        <tr><th>Tool</th><th>Description</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>💀 Force Kill ADB</td><td>Safely terminates the background connection driver. Use if the device becomes unresponsive. Click Refresh afterward.</td></tr>
-                        <tr><td>📱 Samsung ADB Enabler</td><td>Activates ADB on Samsung devices via AT commands. <strong>Prerequisite:</strong> Dial <code>*#0*#</code> on the phone and keep the hardware test menu open.</td></tr>
-                        <tr><td>🔌 Refresh ADB/COM</td><td>Manually scans for connected devices and serial ports.</td></tr>
-                        <tr><td>🛑 Remove FRP</td><td>Bypasses Factory Reset Protection by adjusting setup wizard flags. Follow on-screen prompts.</td></tr>
-                        <tr><td>📸 Backup Media</td><td>Scans internal storage for images, videos, PDFs, and text files. Select items and pull them to PC safely.</td></tr>
-                        <tr><td>📥 Update</td><td>Syncs the latest cloud exclusion list to prevent accidental removal of known critical apps.</td></tr>
-                        <tr><td>💡 Tips & Tricks</td><td>Opens the live guide with setup instructions, developer links, and troubleshooting notes.</td></tr>
-                        <tr><td>🖥️ scrcpy / Device Manager</td><td>Quick-launch buttons for screen mirroring and Windows hardware management.</td></tr>
-                    </tbody>
-                </table>
-                <p><em>Dark/Light mode can be toggled anytime using the checkbox in the top-right corner.</em></p>
-            </section>
-
-            <section id="activation">
-                <h2>🔑 Activation & Support</h2>
-                <div class="activation-box">
-                    <h3>🎁 Get Your License</h3>
-                    <p style="color: #e0e7ff; margin-bottom: 8px;">Need full activation or having issues with your trial?</p>
-                    <p style="color: #cbd5e1; font-size: 0.95rem;">Contact the developer directly for activation support, license purchase, or technical assistance.</p>
-                    <a href="https://www.facebook.com/jairah.mazo.5/" target="_blank">💬 Contact Developer on Facebook</a>
-                </div>
-                
-                <h3>ℹ️ Activation Notes</h3>
-                <ul>
-                    <li><strong>Trial Mode:</strong> New users receive limited trial uses. The counter appears on first launch.</li>
-                    <li><strong>HWID Binding:</strong> Your activation is tied to your PC's unique Hardware ID (displayed in the top bar).</li>
-                    <li><strong>Offline Use:</strong> Once activated, the app works offline.</li>
-                    <li><strong>Re-activation:</strong> If you change major hardware components, contact support to reset your HWID.</li>
-                </ul>
-                
-                <div class="tip-box">
-                    💡 <strong>Before Contacting Support:</strong> Have your HWID ready (click 📋 to copy). Include your Windows version and Android device model for faster assistance.
-                </div>
-            </section>
-
-            <section id="faq">
-                <h2>❓ Troubleshooting & Tips</h2>
-                <ul>
-                    <li><strong>"No device detected":</strong> Ensure USB cable is data-capable, USB debugging is enabled, and the phone is unlocked. Try a different USB port.</li>
-                    <li><strong>"Cleaning failed" popup:</strong> Some Android skins block storage clearing. Enable <em>Disable Permission Monitoring</em> or disable <em>USB Debugging Security</em>.</li>
-                    <li><strong>Apps missing icons after sync:</strong> The helper requires ~10-30 seconds to export icons. Wait for the "DONE" confirmation before closing.</li>
-                    <li><strong>Batch operations stuck:</strong> Use <span class="btn-demo">💀 Force Kill ADB</span>, wait 2 seconds, then click <span class="btn-demo">🔄 Refresh</span>.</li>
-                    <li><strong>Closing the app:</strong> You will be prompted to disable Developer Options automatically for security (recommended for banking/GCash apps).</li>
-                </ul>
-                <div class="tip-box">💡 <strong>Best Practice:</strong> Always backup important apps via the right-click menu before performing bulk uninstalls or system debloating.</div>
-            </section>
-        </main>
-        <footer>
-            <p>APK Cleaner & Uninstaller Pro &copy; by drox-Ph-Ceb<br>
-            Use system tools responsibly.<br>
-            <a href="Password: drox https://www.mediafire.com/file/8jynfa5i2u76xbr/APK_Cleaner_and_Uninstaller_v8_Setup_Installer.rar/file" target="_blank" style="color: var(--accent);">Latest Update</a>
-            <a href="https://www.facebook.com/profile.php?id=61586349835211" target="_blank" style="color: var(--accent);">Contact Developer</a> | 
-            <a href="https://www.youtube.com/watch?v=YfWYg6iBq5k&list=PLq05kYUDiF4S1-MP8G_S847LKlMbtE90O&index=2" target="_blank" style="color: var(--accent);">Watch Tutorials</a></p>
-        </footer>
-    </div>
-    
-    <a href="#" class="back-to-top" id="backToTop" title="Back to Top">↑</a>
-    
-    <script>
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-        backToTop.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    </script>
-</body>
-</html>
+<div class="container">
+<header>
+<h1>APK Cleaner &amp; Uninstaller Pro</h1>
+<strong>Official User Manual &amp; Quick Reference Guide</strong>
+</header>
+<nav>
+<ul>
+<li><a href="#setup">Getting Started</a></li>
+<li><a href="#interface">Interface Overview</a></li>
+<li><a href="#apps">Managing Apps</a></li>
+<li><a href="#debloat">System Disabler</a></li>
+<li><a href="#install">Remove Pop-up Virus</a></li>
+<li><a href="#utilities">Utilities &amp; Tools</a></li>
+<li><a href="#activation">🔑 Activation</a></li>
+<li><a href="#faq">Troubleshooting</a></li>
+</ul>
+</nav>
+<main>
+<section id="setup">
+<h2>📱 Getting Started</h2>
+<p>Before using the application, ensure your Android device is properly prepared:</p>
+<ol>
+<li>Enable <strong>Developer Options</strong> by tapping <em>Build Number</em> 7 times in Settings.</li>
+<li>Navigate to <strong>Developer Options</strong> and toggle it <strong>ON</strong>.</li>
+<li>Enable <strong>USB Debugging</strong>.</li>
+<li>Connect your phone to the PC via USB cable.</li>
+<li>When prompted on your phone, tap <strong>Allow USB Debugging</strong> (check "Always allow" for future sessions).</li>
+</ol>
+<div class="tip-box">💡 <strong>Pro Tip:</strong> If connection fails, try disabling <em>USB Debugging Security</em> or enabling <em>Disable Permission Monitoring</em> in Developer Options.</div>
+</section>
+<section id="interface">
+<h2>🖥️ Interface Overview</h2>
+<p>The main window is divided into logical panels for quick navigation:</p>
+<ul>
+<li><strong>Top Bar:</strong> Displays your unique Hardware ID, connection status (ADB/COM), refresh controls, and theme toggle.</li>
+<li><strong>Left Panel:</strong> Package list with checkboxes, search bar, and color-coded legend. Right-click any app for quick actions.</li>
+<li><strong>Right Panel:</strong> Device information, progress tracking, and real-time operation logs.</li>
+<li><strong>Bottom Bar:</strong> Scrolling announcements &amp; tips. Click to open the full Tips &amp; Tricks dialog.</li>
+</ul>
+<h3>🎨 Color Legend &amp; Exclusions</h3>
+<p>Apps are automatically color-coded based on your protection settings:</p>
+<div class="legend">
+<div class="legend-item"><span class="dot green"></span> Removable (Safe to act on)</div>
+<div class="legend-item"><span class="dot orange"></span> Clean Excluded</div>
+<div class="legend-item"><span class="dot red"></span> Uninstall Excluded</div>
+<div class="legend-item"><span class="dot purple"></span> Both Excluded</div>
+</div>
+<p><em>Clicking a color in the legend filters the list to show only matching apps. Click the same color again to reset.</em></p>
+</section>
+<section id="apps">
+<h2>🧹 Managing Installed Apps</h2>
+<p>Use the main toolbar to perform bulk operations. <strong>Note:</strong> The <span class="btn-demo">Clean</span> and <span class="btn-demo">Uninstall</span> buttons target <strong>unchecked</strong> apps by default.</p>
+<h3>1. Clean &amp; Uninstall</h3>
+<ul>
+<li><strong>Clean (Unchecked):</strong> Clears app cache &amp; storage data to free up space. Automatically includes Google Search, YouTube, and Chrome if detected.</li>
+<li><strong>Uninstall (Unchecked):</strong> Removes selected
